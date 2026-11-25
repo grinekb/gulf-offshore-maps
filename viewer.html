@@ -39,6 +39,8 @@ select{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8
 .allv{flex-basis:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 10px;font-size:12.5px;color:#c8d0e0;border-top:1px solid #2a3350;padding-top:6px}
 .allv div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.allv b{color:#aeb8cc;font-weight:600}.allv .cur{color:#7dffa0}.allv .cur b{color:#7dffa0}
 @media (max-width:560px){.allv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+button.fb{border-color:#ffb300;box-shadow:inset 0 -3px 0 #ffb300}button.fb:after{content:" \25CF";color:#ffb300;font-size:11px}
+.fbb{display:inline-block;background:#3b2a05;color:#ffcc4d;border:1px solid #ffb300;border-radius:6px;padding:1px 7px;font-weight:700;margin-right:4px}.fbr{color:#d9b25a;font-size:12px}
 .err{color:#ff8a80;font-size:13px;padding:30px;text-align:center}
 .pt{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:8px 12px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-height:48px}
 .pt .ddm{font:700 17px ui-monospace,Menlo,Consolas,monospace;color:#fff}.pt .dec,.pt .rb{color:#aeb8cc;font-size:13px}
@@ -156,12 +158,23 @@ document.addEventListener("fullscreenchange",function(){if(!isFs())document.body
 document.addEventListener("webkitfullscreenchange",function(){if(!isFs())document.body.classList.remove("fs");fsChange();});
 window.addEventListener("resize",sizeStage);
 /* ---------- layers ---------- */
-function draw(keep){var l=L[i],n=l.id+"_"+z+".jpg";img.style.display="";var e=el("maperr");if(e)e.remove();
- img.onerror=function(){img.style.display="none";var d=document.createElement("div");d.id="maperr";d.className="err";d.textContent="Map not available yet: "+l.label;stage.appendChild(d);stage.style.height="200px";};
- img.onload=function(){sizeStage();};img.src=url(n);
- el("cap").textContent=(i+1)+" of "+L.length+" \u00b7 "+l.label+" \u00b7 "+(z=="gulf"?"Gulf-wide":"Perdido close-up")+" \u00b7 date and time are printed on the map";
- var b=el("layers").children;for(var k=0;k<b.length;k++)b[k].className=k==i?"on":"";
+var STATUS=null;
+function fbInfo(id){var x=STATUS&&STATUS.layers_info&&STATUS.layers_info[id];return x&&x.fallback?x:null;}
+function shortDate(d){return d?new Date(d.slice(0,10)+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}):"an earlier day";}
+function draw(keep){var l=L[i],n=l.id+"_"+z+".jpg",tries=0,older=(IDX?IDX.dates:[]).filter(function(d){return d<(D||LIVE_DATE||"9999");});img.style.display="";var e=el("maperr");if(e)e.remove();
+ IMGFB=null;
+ img.onerror=function(){ /* never blank if any prior day has this map: walk back through the archive */
+  if(tries<older.length){var d0=older[tries++];IMGFB=d0;img.src="archive/"+d0+"/"+n+"?v=a1";capText();return;}
+  img.style.display="none";var d=document.createElement("div");d.id="maperr";d.className="err";d.textContent="Map not available yet: "+l.label;stage.appendChild(d);stage.style.height="200px";};
+ img.onload=function(){sizeStage();};img.src=url(n);capText();
+ var b=el("layers").children;for(var k=0;k<b.length;k++){var f=fbInfo(L[k].id);b[k].className=(k==i?"on":"")+(f?" fb":"");b[k].title=f?"Showing "+shortDate(f.data_date)+" data (newest available)":"";}
  el("zp").className=z=="perdido"?"on":"";el("zg").className=z=="gulf"?"on":"";apply();refreshVals();}
+var IMGFB=null;
+function capText(){var l=L[i],f=fbInfo(l.id),c=el("cap");
+ var base=(i+1)+" of "+L.length+" \u00b7 "+l.label+" \u00b7 "+(z=="gulf"?"Gulf-wide":"Perdido close-up")+" \u00b7 date and time are printed on the map";
+ if(IMGFB)f={data_date:IMGFB,fallback_reason:"this day's map file is missing"};
+ if(f){c.innerHTML='<span class="fbb">Showing '+esc(shortDate(f.data_date))+' data (newest available)</span> '+esc(base)+(f.fallback_reason?'<br><span class="fbr">Why: '+esc(f.fallback_reason)+'</span>':'');}
+ else c.textContent=base;}
 L.forEach(function(l,k){var b=document.createElement("button");b.textContent=l.label;b.onclick=function(){i=k;draw();};el("layers").appendChild(b);});
 el("prev").onclick=function(){i=(i+L.length-1)%L.length;draw();};el("next").onclick=function(){i=(i+1)%L.length;draw();};
 el("zp").onclick=function(){if(z!="perdido"){z="perdido";draw();}};el("zg").onclick=function(){if(z!="gulf"){z="gulf";draw();}};
@@ -171,6 +184,7 @@ function J(n){return fetch(url(n,D?"a1":V2)).then(function(r){if(!r.ok)throw new
 function nice(d){return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"});}
 function loadDay(){loadValues();
  el("picks").src=url("picks.png",D?"a1":V);GEO=null;SOL=null;
+ STATUS=null;J("status.json").then(function(j){STATUS=j;draw();}).catch(function(){});
  J("georef.json").then(function(j){GEO=j;placeMk();}).catch(function(){el("pt").innerHTML='<span class="hint">Coordinates unavailable for this day (georef.json did not load). Zoom still works.</span>';});
  el("sol").innerHTML='<div class="sub">Loading solunar times\u2026</div>';
  J("solunar.json").then(function(j){SOL=j;sol(j);}).catch(function(){el("sol").innerHTML='<div class="sub">Solunar times not available for this day.</div>';});
@@ -228,10 +242,11 @@ function valText(id,ll,noLabel){var key=base(),j=VALS[key]&&VALS[key][id];if(j==
  if(id==="currents"){var u=sample(g,"u_kt",ll.lat,ll.lon),w=sample(g,"v_kt",ll.lat,ll.lon);if(!isFinite(u)||!isFinite(w))return nd;
   var sp=Math.hypot(u,w),dir=(Math.atan2(u,w)*180/Math.PI+360)%360;return lab+sp.toFixed(2)+" kt toward "+Math.round(dir)+"\u00b0 "+COMP[Math.round(dir/22.5)%16];}
  var s=sample(g,"sss",ll.lat,ll.lon);if(!isFinite(s))return nd;return lab+s.toFixed(2)+" psu";}
-function curVal(){return sel?valText(L[i].id,sel):"";}
-function refreshVals(){var sv=el("selval");if(!sel||!sv)return;var t=valText(L[i].id,sel);sv.textContent=t||"\u2026";sv.className="val"+(/no data|outside|not available/.test(t)?" nd":"");
+function fbNote(id){var f=fbInfo(id);return f?" ("+shortDate(f.data_date).replace(/^\w+, /,"")+" data)":"";}
+function curVal(){return sel?valText(L[i].id,sel)+fbNote(L[i].id):"";}
+function refreshVals(){var sv=el("selval");if(!sel||!sv)return;var t=valText(L[i].id,sel);sv.textContent=t?t+fbNote(L[i].id):"\u2026";sv.className="val"+(/no data|outside|not available/.test(t)?" nd":"");
  var j=VALS[base()]&&VALS[base()][L[i].id];if(j&&j.time)sv.title=j.time+" \u00b7 "+(j.source||"");
- var h="";L.forEach(function(l,k){h+='<div class="'+(k===i?"cur":"")+'"><b>'+esc(SHORT[l.id])+':</b> '+esc(valText(l.id,sel,true)||"\u2026")+'</div>';});var av=el("allv");if(av)av.innerHTML=h;}
+ var h="";L.forEach(function(l,k){h+='<div class="'+(k===i?"cur":"")+'"><b>'+esc(SHORT[l.id])+':</b> '+esc((valText(l.id,sel,true)||"\u2026")+fbNote(l.id))+'</div>';});var av=el("allv");if(av)av.innerHTML=h;}
 /* ---------- solunar ---------- */
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function ctDate(d){return d.toLocaleDateString("en-CA",{timeZone:"America/Chicago"});}

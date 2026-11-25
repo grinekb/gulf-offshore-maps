@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25 14:39 CT",
+ "updated": "2026-11-25 15:31 CT",
  "dates": [
   "2026-11-25"
  ],
@@ -27,6 +27,7 @@
    ],
    "picks_img": true,
    "values": [
+    "chl",
     "currents",
     "salinity",
     "salinity_sat",
@@ -35,13 +36,14 @@
     "sst_alt",
     "sst_blend"
    ],
-   "bytes": 2378204,
+   "bytes": 2401958,
    "picks": {
     "marlin": "27°07.5'N 87°22.5'W · 188 nm @ 177° · near Lloyd Ridge",
     "wahoo": "27°22.2'N 87°01.8'W · 176 nm @ 171° · near Lloyd Ridge",
     "mahi": "28°03.0'N 87°34.5'W · 133 nm @ 180° · near Appomattox",
     "tuna": "28°34.4'N 87°56.1'W · 103 nm @ 191° · near Appomattox"
    },
+   "fallback": {},
    "moon": "Waning Gibbous 98%",
    "rating": 3
   }
