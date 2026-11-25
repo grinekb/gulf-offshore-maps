@@ -1,34 +1,183 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,"><title>MaKs Cast · Gulf Offshore Maps</title>
+<!-- Source: /workspace/gulf-maps/site/viewer.html (publish_live.sh copies it to viewer.html and index.html).
+     Reads live/<layer>_<zoom>.jpg, live/georef.json (click -> lat/lon), live/solunar.json, live/picks.png. -->
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8ecf4;font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:#0b1020;color:#e8ecf4;font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .w{max-width:1000px;margin:0 auto;padding:10px}h1{font-size:20px;margin:4px 0 2px}.sub{color:#aeb8cc;font-size:12.5px}
-.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}button{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer}
-button.on{background:#2f6fed;border-color:#2f6fed}.img{position:relative;width:100%;background:#0d1120;border-radius:8px;overflow:hidden}
-.img img{width:100%;height:auto;display:block}.cap{color:#aeb8cc;font-size:12.5px;margin:6px 0 14px}.err{color:#ff8a80;font-size:13px;padding:30px;text-align:center}
-</style></head><body><div class="w">
-<h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div>
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;align-items:center}
+button{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer;font-family:inherit}
+button.on{background:#2f6fed;border-color:#2f6fed}button:active{transform:translateY(1px)}
+.sp{flex:1}.zb button{min-width:40px;font-weight:700}
+/* solunar */
+.sol{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:10px 12px;margin:8px 0}
+.solh{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}.solh b{font-size:15px}.solh span{color:#aeb8cc;font-size:13px}
+.pers{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.per{border:1px solid #3a4670;border-radius:8px;padding:5px 8px;font-size:13px;background:#182038;line-height:1.3}
+.per .t{font-weight:700}.per.major{border-color:#4fc3f7}.per.major .k{color:#4fc3f7}.per.minor .k{color:#aed581}
+.per.now{background:#1f5f2e;border-color:#5be37a}.per.next{background:#3b3315;border-color:#ffcc4d}.per.past{opacity:.5}
+.per .tag{font-size:11px;font-weight:700;margin-left:4px}.per.now .tag{color:#7dffa0}.per.next .tag{color:#ffd36b}
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-top:6px}
+.day{flex:0 0 auto;min-width:118px;background:#182038;border:1px solid #2a3350;border-radius:8px;padding:5px 7px;font-size:11.5px;line-height:1.35}
+.day.today{border-color:#2f6fed}.day .dh{font-weight:700;font-size:12.5px}.day .mj{color:#4fc3f7}.day .mn{color:#aed581}.day .st{color:#ffcc4d}
+/* map */
+.stage{position:relative;width:100%;background:#0d1120;border-radius:8px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.stage.zoomed{touch-action:none;cursor:grab}.stage.drag{cursor:grabbing}
+.inner{position:absolute;left:0;top:0;width:100%;transform-origin:0 0;will-change:transform}
+.inner img{width:100%;height:auto;display:block;pointer-events:none;-webkit-user-drag:none}
+.mk{position:absolute;width:0;height:0;pointer-events:none;display:none}
+.mk:before{content:"";position:absolute;left:-11px;top:-11px;width:18px;height:18px;border:2px solid #ff3d3d;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.6)}
+.mk:after{content:"";position:absolute;left:-3px;top:-3px;width:6px;height:6px;background:#ff3d3d;border-radius:50%;box-shadow:0 0 0 1px #000}
+.hover{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.65);color:#fff;font:12px ui-monospace,Menlo,Consolas,monospace;padding:4px 7px;border-radius:6px;pointer-events:none;display:none}
+.zl{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:3px 7px;border-radius:6px;pointer-events:none}
+.err{color:#ff8a80;font-size:13px;padding:30px;text-align:center}
+.pt{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:8px 12px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-height:48px}
+.pt .ddm{font:700 17px ui-monospace,Menlo,Consolas,monospace;color:#fff}.pt .dec,.pt .rb{color:#aeb8cc;font-size:13px}
+.pt .hint{color:#8892a6;font-size:13px}
+.cap{color:#aeb8cc;font-size:12.5px;margin:6px 0 14px}
+.pk{border-radius:8px;overflow:hidden}.pk img{width:100%;display:block}
+.fs .w{max-width:none;height:100vh;display:flex;flex-direction:column;padding:6px}
+.fs .stage{flex:1 1 auto;min-height:0}.fs .hide-fs{display:none}
+.fs .stage .inner{}
+</style></head><body><div class="w" id="wrap">
+<div class="hide-fs"><h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div></div>
+<div class="sol hide-fs" id="sol"><div class="sub">Loading solunar times…</div></div>
 <div class="bar" id="layers"></div>
 <div class="bar"><button id="prev">&#9664; Prev</button><button id="next">Next &#9654;</button>
-<button id="zp">Perdido close-up</button><button id="zg">Gulf-wide</button></div>
-<div class="img"><img id="map" alt="Gulf map"></div><div class="cap" id="cap"></div>
-<div class="img"><img id="picks" alt="Today's best spots"></div>
-<div class="cap">Maps: NOAA CoastWatch, JPL MUR, NOAA RTOFS. Experimental, not for navigation. Updated each morning.</div>
+<button id="zp">Perdido close-up</button><button id="zg">Gulf-wide</button><span class="sp"></span>
+<span class="bar zb" style="margin:0"><button id="zin" title="Zoom in">+</button><button id="zout" title="Zoom out">&minus;</button><button id="zr" title="Reset zoom">Reset</button><button id="fsb" title="Full screen">&#x26F6; Full screen</button></span></div>
+<div class="stage" id="stage"><div class="inner" id="inner"><img id="map" alt="Gulf map"></div><div class="mk" id="mk"></div><div class="hover" id="hover"></div><div class="zl" id="zl">1&times;</div></div>
+<div class="pt" id="pt"><span class="hint">Tap or click a spot on the map to see its coordinates. Scroll or pinch to zoom, drag to move.</span></div>
+<div class="cap" id="cap"></div>
+<div class="hide-fs"><div class="pk"><img id="picks" alt="Today's best spots"></div>
+<div class="cap">Maps: NOAA CoastWatch, JPL MUR, NOAA RTOFS. Solunar: moon overhead/underfoot (major, 2 h) and moonrise/moonset (minor, 1 h) for Perdido Pass, Central Time. Experimental, not for navigation. Updated each morning.</div></div>
 </div><script>
-var BASE="https://grinekb.github.io/gulf-offshore-maps/live/", URLS={}, L=[{"id": "sst", "label": "SST"}, {"id": "sst_alt", "label": "SST alt pass"}, {"id": "sst_blend", "label": "SST blend"}, {"id": "chl", "label": "Chlorophyll"}, {"id": "ssh", "label": "Altimetry"}, {"id": "currents", "label": "Currents"}, {"id": "salinity", "label": "Salinity"}, {"id": "salinity_sat", "label": "Salinity sat"}], i=0, z="perdido";
-function ct(){var d=new Date(Date.now()-6*3600e3);return d.toISOString().slice(0,13).replace(/[-T]/g,"");}
-var V=ct();
-function url(n){var u=URLS[n]||(BASE+n);return u+(u.indexOf("?")<0?"?":"&")+"v="+V;}
+(function(){
+var L=[{id:"sst",label:"SST"},{id:"sst_alt",label:"SST alt pass"},{id:"sst_blend",label:"SST blend"},{id:"chl",label:"Chlorophyll"},{id:"ssh",label:"Altimetry"},{id:"currents",label:"Currents"},{id:"salinity",label:"Salinity"},{id:"salinity_sat",label:"Salinity sat"}];
+var PP={lat:30.2583,lon:-87.5567}; /* Perdido Pass, same as spots.json */
+var BASE="live/", i=0, z="perdido", GEO=null, sel=null, MAXS=12;
+var T={perdido:{s:1,x:0,y:0},gulf:{s:1,x:0,y:0}};
 function el(id){return document.getElementById(id);}
-function draw(){var l=L[i],n=l.id+"_"+z+".jpg",im=el("map");im.style.display="";
- var e=el("maperr");if(e)e.remove();
- im.onerror=function(){im.style.display="none";var d=document.createElement("div");d.id="maperr";d.className="err";d.textContent="Map not available yet: "+l.label;im.parentNode.appendChild(d);};
- im.src=url(n);el("cap").textContent=(i+1)+" of "+L.length+" \u00b7 "+l.label+" \u00b7 "+(z=="gulf"?"Gulf-wide":"Perdido close-up")+" \u00b7 date and time are printed on the map";
+function ctNow(){return new Date(Date.now()-6*3600e3);} /* CST (no DST in winter; fine for cache keys) */
+var V=ctNow().toISOString().slice(0,13).replace(/[-T]/g,"");
+function url(n,v){return BASE+n+"?v="+(v||V);}
+var stage=el("stage"),inner=el("inner"),img=el("map"),mk=el("mk"),hover=el("hover");
+/* ---------- geo ---------- */
+function g(){return GEO&&GEO.images[L[i].id+"_"+z+".jpg"];}
+function fracToLL(fx,fy){var G=g();if(!G)return null;var a=G.ax,u=(fx-a[0])/(a[2]-a[0]),v=(fy-a[1])/(a[3]-a[1]);
+ if(u<0||u>1||v<0||v>1)return null;var x=G.x[0]+u*(G.x[1]-G.x[0]),y=G.y[1]-v*(G.y[1]-G.y[0]);
+ var A=G.a,f=1/G.inv_f,e=Math.sqrt(f*(2-f)),lon=x/A*180/Math.PI+(G.lon0||0),t=Math.exp(-y/A),p=Math.PI/2-2*Math.atan(t);
+ for(var k=0;k<12;k++){var es=e*Math.sin(p);p=Math.PI/2-2*Math.atan(t*Math.pow((1-es)/(1+es),e/2));}
+ return {lat:p*180/Math.PI,lon:lon};}
+function llToFrac(lat,lon){var G=g();if(!G)return null;var A=G.a,f=1/G.inv_f,e=Math.sqrt(f*(2-f)),p=lat*Math.PI/180,es=e*Math.sin(p);
+ var x=A*((lon-(G.lon0||0))*Math.PI/180),y=A*Math.log(Math.tan(Math.PI/4+p/2)*Math.pow((1-es)/(1+es),e/2)),a=G.ax;
+ var u=(x-G.x[0])/(G.x[1]-G.x[0]),v=(G.y[1]-y)/(G.y[1]-G.y[0]);if(u<0||u>1||v<0||v>1)return null;
+ return {fx:a[0]+u*(a[2]-a[0]),fy:a[1]+v*(a[3]-a[1])};}
+function ddm(v,P,N){var h=v>=0?P:N;v=Math.abs(v);var d=Math.floor(v),m=(v-d)*60;if(m>=59.9995){d++;m=0;}
+ return d+"\u00b0 "+(m<10?"0":"")+m.toFixed(3)+"' "+h;}
+function rngBrg(lat,lon){var R=3440.065,r=Math.PI/180,p1=PP.lat*r,p2=lat*r,dl=(lon-PP.lon)*r;
+ var h=Math.sin((p2-p1)/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2,d=2*R*Math.asin(Math.sqrt(h));
+ var b=Math.atan2(Math.sin(dl)*Math.cos(p2),Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl))/r;return {nm:d,brg:(b+360)%360};}
+function fmt(ll){return ddm(ll.lat,"N","S")+"  "+ddm(ll.lon,"E","W");}
+/* ---------- transform ---------- */
+function W(){return stage.clientWidth;} function H(){return stage.clientHeight;}
+function AR(){return img.naturalWidth?img.naturalHeight/img.naturalWidth:0.8;}
+function BW(){return document.body.classList.contains("fs")?Math.min(W(),H()/AR()):W();}
+function clamp(t){var w=W(),h=H(),bw=BW();inner.style.width=bw+"px";
+ t.s=Math.max(1,Math.min(MAXS,t.s));var iw=bw*t.s,ih=bw*AR()*t.s;
+ if(iw<=w)t.x=(w-iw)/2;else t.x=Math.min(0,Math.max(w-iw,t.x));
+ if(ih<=h)t.y=(h-ih)/2;else t.y=Math.min(0,Math.max(h-ih,t.y));}
+var lastBW=0;
+function apply(){var t=T[z];if(!W()||!img.naturalWidth)return;var bw=BW();if(lastBW&&Math.abs(bw-lastBW)>0.5){for(var k in T){T[k].x*=bw/lastBW;T[k].y*=bw/lastBW;}}lastBW=bw;clamp(t);inner.style.transform="translate("+t.x+"px,"+t.y+"px) scale("+t.s+")";
+ stage.classList.toggle("zoomed",t.s>1.001);el("zl").textContent=(Math.round(t.s*10)/10)+"\u00d7";placeMk();}
+function zoomAt(cx,cy,k){var t=T[z],ns=Math.max(1,Math.min(MAXS,t.s*k));k=ns/t.s;t.x=cx-(cx-t.x)*k;t.y=cy-(cy-t.y)*k;t.s=ns;apply();}
+function sizeStage(){if(document.body.classList.contains("fs")){stage.style.height="";}else if(img.naturalWidth){stage.style.height=(W()*img.naturalHeight/img.naturalWidth)+"px";}apply();}
+function toFrac(cx,cy){var t=T[z],w=BW(),ih=w*AR();return {fx:(cx-t.x)/t.s/w,fy:(cy-t.y)/t.s/ih};}
+function placeMk(){if(!sel||!img.naturalWidth){mk.style.display="none";return;}var f=llToFrac(sel.lat,sel.lon);if(!f){mk.style.display="none";return;}
+ var t=T[z],w=BW(),ih=w*AR();mk.style.left=(t.x+f.fx*w*t.s)+"px";mk.style.top=(t.y+f.fy*ih*t.s)+"px";mk.style.display="block";}
+function showSel(){var p=el("pt");if(!sel){p.innerHTML='<span class="hint">Tap or click a spot on the map to see its coordinates. Scroll or pinch to zoom, drag to move.</span>';return;}
+ var rb=rngBrg(sel.lat,sel.lon),txt=fmt(sel);
+ p.innerHTML='<span class="ddm" id="selddm"></span><span class="dec" id="seldec"></span><span class="rb" id="selrb"></span><button id="cp">Copy</button><button id="clr">Clear</button>';
+ el("selddm").textContent=txt;el("seldec").textContent=sel.lat.toFixed(5)+", "+sel.lon.toFixed(5);
+ el("selrb").textContent=rb.nm.toFixed(1)+" nm @ "+Math.round(rb.brg)+"\u00b0 from Perdido Pass";
+ el("cp").onclick=function(){var s=txt+"  ("+sel.lat.toFixed(5)+", "+sel.lon.toFixed(5)+")";var b=el("cp");
+  function ok(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy";},1500);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(ok,function(){fb(s);ok();});}else{fb(s);ok();}};
+ el("clr").onclick=function(){sel=null;placeMk();showSel();};}
+function fb(s){var ta=document.createElement("textarea");ta.value=s;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(e){}ta.remove();}
+/* ---------- pointer gestures ---------- */
+var P={},down=null,pinch=null;
+function rel(e){var r=stage.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};}
+stage.addEventListener("pointerdown",function(e){if(e.button&&e.button!==0)return;var q=rel(e);P[e.pointerId]=q;
+ try{stage.setPointerCapture(e.pointerId);}catch(_){}
+ var ids=Object.keys(P);if(ids.length===1){down={x:q.x,y:q.y,t:Date.now(),tx:T[z].x,ty:T[z].y,moved:false};}
+ else if(ids.length===2){var a=P[ids[0]],b=P[ids[1]];pinch={d:Math.hypot(a.x-b.x,a.y-b.y),s:T[z].s,cx:(a.x+b.x)/2,cy:(a.y+b.y)/2,tx:T[z].x,ty:T[z].y};if(down)down.moved=true;}});
+stage.addEventListener("pointermove",function(e){var q=rel(e);
+ if(e.pointerType==="mouse"&&GEO&&img.naturalWidth){var f=toFrac(q.x,q.y),ll=fracToLL(f.fx,f.fy);if(ll){hover.textContent=fmt(ll);hover.style.display="block";}else hover.style.display="none";}
+ if(!P[e.pointerId])return;P[e.pointerId]=q;var ids=Object.keys(P);
+ if(ids.length>=2&&pinch){var a=P[ids[0]],b=P[ids[1]],d=Math.hypot(a.x-b.x,a.y-b.y),cx=(a.x+b.x)/2,cy=(a.y+b.y)/2,t=T[z];
+  var ns=Math.max(1,Math.min(MAXS,pinch.s*d/pinch.d)),k=ns/pinch.s;t.s=ns;t.x=cx-(pinch.cx-pinch.tx)*k;t.y=cy-(pinch.cy-pinch.ty)*k;apply();e.preventDefault();return;}
+ if(down){var dx=q.x-down.x,dy=q.y-down.y;if(Math.abs(dx)+Math.abs(dy)>6)down.moved=true;
+  if(down.moved&&T[z].s>1.001){stage.classList.add("drag");T[z].x=down.tx+dx;T[z].y=down.ty+dy;apply();e.preventDefault();}}});
+function up(e){var q=P[e.pointerId];delete P[e.pointerId];var n=Object.keys(P).length;stage.classList.remove("drag");
+ if(n<2)pinch=null;
+ if(n===1){var id=Object.keys(P)[0];down={x:P[id].x,y:P[id].y,t:Date.now(),tx:T[z].x,ty:T[z].y,moved:true};return;}
+ if(e.type==="pointerup"&&down&&!down.moved&&q&&Date.now()-down.t<800&&GEO&&img.naturalWidth){var f=toFrac(q.x,q.y),ll=fracToLL(f.fx,f.fy);
+  if(ll){sel=ll;placeMk();showSel();}else{el("pt").innerHTML='<span class="hint">That spot is outside the map area. Tap inside the map.</span>';}}
+ down=null;}
+stage.addEventListener("pointerup",up);stage.addEventListener("pointercancel",up);
+stage.addEventListener("pointerleave",function(e){if(e.pointerType==="mouse")hover.style.display="none";});
+stage.addEventListener("wheel",function(e){e.preventDefault();var q=rel(e);zoomAt(q.x,q.y,Math.exp(-e.deltaY*(e.deltaMode===1?0.05:0.0018)));},{passive:false});
+stage.addEventListener("dblclick",function(e){var q=rel(e);zoomAt(q.x,q.y,2);});
+el("zin").onclick=function(){zoomAt(W()/2,H()/2,1.6);};el("zout").onclick=function(){zoomAt(W()/2,H()/2,1/1.6);};
+el("zr").onclick=function(){T[z]={s:1,x:0,y:0};apply();};
+/* ---------- fullscreen ---------- */
+function isFs(){return document.fullscreenElement||document.webkitFullscreenElement;}
+el("fsb").onclick=function(){var d=document.documentElement;
+ if(isFs()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return;}
+ var rq=d.requestFullscreen||d.webkitRequestFullscreen;
+ if(rq&&(document.fullscreenEnabled||document.webkitFullscreenEnabled)){rq.call(d);}
+ else if(window.top!==window.self){window.open(location.href,"_blank");}
+ else{document.body.classList.toggle("fs");fsChange();}};
+function fsChange(){var on=!!isFs()||document.body.classList.contains("fs");document.body.classList.toggle("fs",on);el("fsb").innerHTML=on?"&#x2715; Exit full screen":"&#x26F6; Full screen";setTimeout(sizeStage,50);}
+document.addEventListener("fullscreenchange",function(){if(!isFs())document.body.classList.remove("fs");fsChange();});
+document.addEventListener("webkitfullscreenchange",function(){if(!isFs())document.body.classList.remove("fs");fsChange();});
+window.addEventListener("resize",sizeStage);
+/* ---------- layers ---------- */
+function draw(keep){var l=L[i],n=l.id+"_"+z+".jpg";img.style.display="";var e=el("maperr");if(e)e.remove();
+ img.onerror=function(){img.style.display="none";var d=document.createElement("div");d.id="maperr";d.className="err";d.textContent="Map not available yet: "+l.label;stage.appendChild(d);stage.style.height="200px";};
+ img.onload=function(){sizeStage();};img.src=url(n);
+ el("cap").textContent=(i+1)+" of "+L.length+" \u00b7 "+l.label+" \u00b7 "+(z=="gulf"?"Gulf-wide":"Perdido close-up")+" \u00b7 date and time are printed on the map";
  var b=el("layers").children;for(var k=0;k<b.length;k++)b[k].className=k==i?"on":"";
- el("zp").className=z=="perdido"?"on":"";el("zg").className=z=="gulf"?"on":"";}
+ el("zp").className=z=="perdido"?"on":"";el("zg").className=z=="gulf"?"on":"";apply();}
 L.forEach(function(l,k){var b=document.createElement("button");b.textContent=l.label;b.onclick=function(){i=k;draw();};el("layers").appendChild(b);});
 el("prev").onclick=function(){i=(i+L.length-1)%L.length;draw();};el("next").onclick=function(){i=(i+1)%L.length;draw();};
-el("zp").onclick=function(){z="perdido";draw();};el("zg").onclick=function(){z="gulf";draw();};
+el("zp").onclick=function(){if(z!="perdido"){z="perdido";draw();}};el("zg").onclick=function(){if(z!="gulf"){z="gulf";draw();}};
 el("picks").src=url("picks.png");
 el("stamp").textContent="Viewed "+new Date().toLocaleString("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" CT \u00b7 range and bearing from Perdido Pass";
+var V2=Math.floor(Date.now()/600000);
+fetch(url("georef.json",V2)).then(function(r){return r.json();}).then(function(j){GEO=j;placeMk();}).catch(function(){el("pt").innerHTML='<span class="hint">Coordinates unavailable (georef.json did not load). Zoom still works.</span>';});
+/* ---------- solunar ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function ctDate(d){return d.toLocaleDateString("en-CA",{timeZone:"America/Chicago"});}
+function hm(iso){return new Date(iso).toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit"});}
+function inMin(ms){var m=Math.round(ms/60000),h=Math.floor(m/60);return (h?h+"h ":"")+(m%60)+"m";}
+function stars(n){return "\u2605".repeat(n)+"\u2606".repeat(Math.max(0,3-n));}
+function sol(S){var now=Date.now(),today=ctDate(new Date()),days=S.days.filter(function(d){return d.date>=today;});if(!days.length)days=S.days.slice(-1);
+ var d0=days[0],all=[];S.days.forEach(function(d){d.periods.forEach(function(p){all.push(p);});});
+ var cur=all.filter(function(p){return new Date(p.start)<=now&&now<new Date(p.end);})[0],nxt=all.filter(function(p){return new Date(p.start)>now;}).sort(function(a,b){return new Date(a.start)-new Date(b.start);})[0];
+ var h='<div class="solh"><b>Solunar \u00b7 Perdido Pass \u00b7 '+esc(d0.dow)+' '+esc(d0.date.slice(5).replace("-","/"))+'</b><span>Sunrise '+esc(d0.sunrise)+' \u00b7 Sunset '+esc(d0.sunset)+'</span><span>'+esc(d0.moon_phase)+' \u00b7 '+d0.illumination_pct+'% lit</span><span class="st" style="color:#ffcc4d">'+stars(d0.rating)+'</span></div>';
+ var status=cur?'<b style="color:#7dffa0">NOW:</b> '+(cur.type=="major"?"Major":"Minor")+" ("+esc(cur.event)+") until "+hm(cur.end):(nxt?'<b style="color:#ffd36b">NEXT:</b> '+(nxt.type=="major"?"Major":"Minor")+" "+hm(nxt.start)+" \u2013 "+hm(nxt.end)+" (in "+inMin(new Date(nxt.start)-now)+")":"");
+ h+='<div class="pers">';d0.periods.forEach(function(p){var c="per "+p.type,tag="";
+  if(cur===p){c+=" now";tag="NOW";}else if(nxt===p){c+=" next";tag="NEXT";}else if(new Date(p.end)<=now)c+=" past";
+  h+='<div class="'+c+'"><span class="k t">'+(p.type=="major"?"Major":"Minor")+'</span> '+esc(p.label)+(tag?'<span class="tag">'+tag+'</span>':'')+'<br><span style="color:#aeb8cc;font-size:12px">'+esc(p.event)+' '+hm(p.center)+'</span></div>';});
+ h+='</div><div class="sub">'+status+' \u00b7 CT</div><div class="days">';
+ days.forEach(function(d,k){var mj=d.periods.filter(function(p){return p.type=="major";}).map(function(p){return hm(p.start);}),mn=d.periods.filter(function(p){return p.type=="minor";}).map(function(p){return hm(p.start);});
+  h+='<div class="day'+(k==0?" today":"")+'"><div class="dh">'+(k==0?"Today":esc(d.dow))+' '+esc(d.date.slice(5).replace("-","/"))+' <span class="st">'+stars(d.rating)+'</span></div><div class="mj">Maj '+esc(mj.join(", "))+'</div><div class="mn">Min '+esc(mn.join(", "))+'</div><div style="color:#aeb8cc">'+esc(d.moon_phase)+' '+d.illumination_pct+'%</div></div>';});
+ h+='</div><div class="sub" style="margin-top:4px;font-size:11.5px">Major = moon overhead/underfoot (2 h). Minor = moonrise/moonset (1 h). Strip shows start times. Stars: more near new/full moon and when a period lines up with sunrise or sunset.</div>';
+ el("sol").innerHTML=h;}
+var SOL=null;fetch(url("solunar.json",V2)).then(function(r){return r.json();}).then(function(j){SOL=j;sol(j);setInterval(function(){sol(SOL);},60000);}).catch(function(){el("sol").innerHTML='<div class="sub">Solunar times not available yet.</div>';});
 draw();
+})();
 </script></body></html>
