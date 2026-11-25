@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "generated_ct": "2026-11-25 07:51 CT",
+ "generated_ct": "2026-11-25 14:01 CT",
  "layers": {
   "sst_blend": {
    "label": "SST blend",
@@ -22,7 +22,7 @@
   },
   "ssh": {
    "label": "Altimetry",
-   "image_time": "2026-11-23",
+   "image_time": "2026-11-24",
    "source": "NOAA CoastWatch ERDDAP noaacwBLENDEDsshDaily + noaacwBLENDEDNRTcurrentsDaily",
    "files": {
     "gulf": "ssh_gulf.png",

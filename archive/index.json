@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25 11:31 CT",
+ "updated": "2026-11-25 14:39 CT",
  "dates": [
   "2026-11-25"
  ],
@@ -26,7 +26,16 @@
     "sst_perdido"
    ],
    "picks_img": true,
-   "bytes": 2268304,
+   "values": [
+    "currents",
+    "salinity",
+    "salinity_sat",
+    "ssh",
+    "sst",
+    "sst_alt",
+    "sst_blend"
+   ],
+   "bytes": 2378204,
    "picks": {
     "marlin": "27°07.5'N 87°22.5'W · 188 nm @ 177° · near Lloyd Ridge",
     "wahoo": "27°22.2'N 87°01.8'W · 176 nm @ 171° · near Lloyd Ridge",
