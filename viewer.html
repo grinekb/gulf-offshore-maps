@@ -9,7 +9,7 @@
 .bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;align-items:center}
 button{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer;font-family:inherit}
 button.on{background:#2f6fed;border-color:#2f6fed}button:active{transform:translateY(1px)}
-.sp{flex:1}.zb button{min-width:40px;font-weight:700}
+.sp{flex:1}.hdr{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0 12px}.hdr .dbar{margin:4px 0}.zb button{min-width:40px;font-weight:700}
 /* solunar */
 .sol{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:10px 12px;margin:8px 0}
 .solh{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}.solh b{font-size:15px}.solh span{color:#aeb8cc;font-size:13px}
@@ -31,6 +31,9 @@ button.on{background:#2f6fed;border-color:#2f6fed}button:active{transform:transl
 .mk:after{content:"";position:absolute;left:-3px;top:-3px;width:6px;height:6px;background:#ff3d3d;border-radius:50%;box-shadow:0 0 0 1px #000}
 .hover{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.65);color:#fff;font:12px ui-monospace,Menlo,Consolas,monospace;padding:4px 7px;border-radius:6px;pointer-events:none;display:none}
 .zl{position:absolute;right:8px;top:8px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;padding:3px 7px;border-radius:6px;pointer-events:none}
+select{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8px;padding:8px 6px;font-size:14px;font-family:inherit;max-width:190px}
+.banner{display:none;background:#3b3315;border:1px solid #ffcc4d;color:#ffe08a;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:14px}.banner b{color:#fff}.banner button{margin-left:8px;padding:4px 10px;font-size:13px}
+.fs .banner{display:none!important}
 .err{color:#ff8a80;font-size:13px;padding:30px;text-align:center}
 .pt{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:8px 12px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;min-height:48px}
 .pt .ddm{font:700 17px ui-monospace,Menlo,Consolas,monospace;color:#fff}.pt .dec,.pt .rb{color:#aeb8cc;font-size:13px}
@@ -41,7 +44,9 @@ button.on{background:#2f6fed;border-color:#2f6fed}button:active{transform:transl
 .fs .stage{flex:1 1 auto;min-height:0}.fs .hide-fs{display:none}
 .fs .stage .inner{}
 </style></head><body><div class="w" id="wrap">
-<div class="hide-fs"><h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div></div>
+<div class="hdr hide-fs"><div><h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div></div>
+<div class="bar dbar" id="dbar"><button id="dprev" title="Older day">&#9664; Day</button><select id="dsel" aria-label="Pick a date"><option>Today</option></select><button id="dnext" title="Newer day">Day &#9654;</button><button id="dtoday">Today</button><span class="sub" id="dinfo"></span></div></div>
+<div class="banner" id="banner"></div>
 <div class="sol hide-fs" id="sol"><div class="sub">Loading solunar times…</div></div>
 <div class="bar" id="layers"></div>
 <div class="bar"><button id="prev">&#9664; Prev</button><button id="next">Next &#9654;</button>
@@ -56,12 +61,13 @@ button.on{background:#2f6fed;border-color:#2f6fed}button:active{transform:transl
 (function(){
 var L=[{id:"sst",label:"SST"},{id:"sst_alt",label:"SST alt pass"},{id:"sst_blend",label:"SST blend"},{id:"chl",label:"Chlorophyll"},{id:"ssh",label:"Altimetry"},{id:"currents",label:"Currents"},{id:"salinity",label:"Salinity"},{id:"salinity_sat",label:"Salinity sat"}];
 var PP={lat:30.2583,lon:-87.5567}; /* Perdido Pass, same as spots.json */
-var BASE="live/", i=0, z="perdido", GEO=null, sel=null, MAXS=12;
+var D=null, LIVE_DATE=null, IDX=null, i=0, z="perdido", GEO=null, sel=null, MAXS=12;
 var T={perdido:{s:1,x:0,y:0},gulf:{s:1,x:0,y:0}};
 function el(id){return document.getElementById(id);}
 function ctNow(){return new Date(Date.now()-6*3600e3);} /* CST (no DST in winter; fine for cache keys) */
 var V=ctNow().toISOString().slice(0,13).replace(/[-T]/g,"");
-function url(n,v){return BASE+n+"?v="+(v||V);}
+function base(){return D?"archive/"+D+"/":"live/";}
+function url(n,v){return base()+n+"?v="+(v||V);}
 var stage=el("stage"),inner=el("inner"),img=el("map"),mk=el("mk"),hover=el("hover");
 /* ---------- geo ---------- */
 function g(){return GEO&&GEO.images[L[i].id+"_"+z+".jpg"];}
@@ -154,30 +160,56 @@ function draw(keep){var l=L[i],n=l.id+"_"+z+".jpg";img.style.display="";var e=el
 L.forEach(function(l,k){var b=document.createElement("button");b.textContent=l.label;b.onclick=function(){i=k;draw();};el("layers").appendChild(b);});
 el("prev").onclick=function(){i=(i+L.length-1)%L.length;draw();};el("next").onclick=function(){i=(i+1)%L.length;draw();};
 el("zp").onclick=function(){if(z!="perdido"){z="perdido";draw();}};el("zg").onclick=function(){if(z!="gulf"){z="gulf";draw();}};
-el("picks").src=url("picks.png");
 el("stamp").textContent="Viewed "+new Date().toLocaleString("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" CT \u00b7 range and bearing from Perdido Pass";
 var V2=Math.floor(Date.now()/600000);
-fetch(url("georef.json",V2)).then(function(r){return r.json();}).then(function(j){GEO=j;placeMk();}).catch(function(){el("pt").innerHTML='<span class="hint">Coordinates unavailable (georef.json did not load). Zoom still works.</span>';});
+function J(n){return fetch(url(n,D?"a1":V2)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}
+function nice(d){return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"});}
+function loadDay(){
+ el("picks").src=url("picks.png",D?"a1":V);GEO=null;SOL=null;
+ J("georef.json").then(function(j){GEO=j;placeMk();}).catch(function(){el("pt").innerHTML='<span class="hint">Coordinates unavailable for this day (georef.json did not load). Zoom still works.</span>';});
+ el("sol").innerHTML='<div class="sub">Loading solunar times\u2026</div>';
+ J("solunar.json").then(function(j){SOL=j;sol(j);}).catch(function(){el("sol").innerHTML='<div class="sub">Solunar times not available for this day.</div>';});
+ var b=el("banner");if(D){b.style.display="block";b.innerHTML='<b>Viewing archive: '+esc(nice(D))+'</b> \u00b7 maps, picks and solunar as published that morning<button id="bback">Back to today</button>';el("bback").onclick=function(){setDate(null);};}else b.style.display="none";
+ var sd=el("dsel");sd.value=D||"";
+ var ds=IDX?IDX.dates:[],cur=D||LIVE_DATE,k=ds.indexOf(cur);
+ el("dprev").disabled=!(k>=0&&k<ds.length-1);el("dnext").disabled=!D;el("dtoday").className=D?"":"on";
+ el("dinfo").textContent=ds.length?ds.length+" day"+(ds.length>1?"s":"")+" archived":"";
+ draw();}
+function setDate(d){if(d&&d===LIVE_DATE)d=null;D=d||null;
+ try{var u=new URL(location.href);if(D)u.searchParams.set("date",D);else u.searchParams.delete("date");history.replaceState(null,"",u.toString());}catch(e){}
+ loadDay();}
+function fillSel(){var sd=el("dsel"),h='<option value="">Today'+(LIVE_DATE?" ("+esc(nice(LIVE_DATE))+")":"")+'</option>';
+ (IDX?IDX.dates:[]).forEach(function(d){if(d!==LIVE_DATE)h+='<option value="'+esc(d)+'">'+esc(nice(d))+'</option>';});sd.innerHTML=h;sd.value=D||"";}
+el("dsel").onchange=function(){setDate(this.value||null);};
+el("dtoday").onclick=function(){setDate(null);};
+el("dprev").onclick=function(){var ds=IDX?IDX.dates:[],k=ds.indexOf(D||LIVE_DATE);if(k>=0&&k<ds.length-1)setDate(ds[k+1]);};
+el("dnext").onclick=function(){var ds=IDX?IDX.dates:[],k=ds.indexOf(D);if(k>0)setDate(ds[k-1]);else setDate(null);};
 /* ---------- solunar ---------- */
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function ctDate(d){return d.toLocaleDateString("en-CA",{timeZone:"America/Chicago"});}
 function hm(iso){return new Date(iso).toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour:"numeric",minute:"2-digit"});}
 function inMin(ms){var m=Math.round(ms/60000),h=Math.floor(m/60);return (h?h+"h ":"")+(m%60)+"m";}
 function stars(n){return "\u2605".repeat(n)+"\u2606".repeat(Math.max(0,3-n));}
-function sol(S){var now=Date.now(),today=ctDate(new Date()),days=S.days.filter(function(d){return d.date>=today;});if(!days.length)days=S.days.slice(-1);
+function sol(S){var arch=!!D,now=arch?0:Date.now(),today=arch?D:ctDate(new Date()),days=S.days.filter(function(d){return d.date>=today;});if(!days.length)days=S.days.slice(-1);
  var d0=days[0],all=[];S.days.forEach(function(d){d.periods.forEach(function(p){all.push(p);});});
- var cur=all.filter(function(p){return new Date(p.start)<=now&&now<new Date(p.end);})[0],nxt=all.filter(function(p){return new Date(p.start)>now;}).sort(function(a,b){return new Date(a.start)-new Date(b.start);})[0];
+ var cur=arch?null:all.filter(function(p){return new Date(p.start)<=now&&now<new Date(p.end);})[0],nxt=arch?null:all.filter(function(p){return new Date(p.start)>now;}).sort(function(a,b){return new Date(a.start)-new Date(b.start);})[0];
  var h='<div class="solh"><b>Solunar \u00b7 Perdido Pass \u00b7 '+esc(d0.dow)+' '+esc(d0.date.slice(5).replace("-","/"))+'</b><span>Sunrise '+esc(d0.sunrise)+' \u00b7 Sunset '+esc(d0.sunset)+'</span><span>'+esc(d0.moon_phase)+' \u00b7 '+d0.illumination_pct+'% lit</span><span class="st" style="color:#ffcc4d">'+stars(d0.rating)+'</span></div>';
  var status=cur?'<b style="color:#7dffa0">NOW:</b> '+(cur.type=="major"?"Major":"Minor")+" ("+esc(cur.event)+") until "+hm(cur.end):(nxt?'<b style="color:#ffd36b">NEXT:</b> '+(nxt.type=="major"?"Major":"Minor")+" "+hm(nxt.start)+" \u2013 "+hm(nxt.end)+" (in "+inMin(new Date(nxt.start)-now)+")":"");
  h+='<div class="pers">';d0.periods.forEach(function(p){var c="per "+p.type,tag="";
-  if(cur===p){c+=" now";tag="NOW";}else if(nxt===p){c+=" next";tag="NEXT";}else if(new Date(p.end)<=now)c+=" past";
+  if(cur===p){c+=" now";tag="NOW";}else if(nxt===p){c+=" next";tag="NEXT";}else if(!arch&&new Date(p.end)<=now)c+=" past";
   h+='<div class="'+c+'"><span class="k t">'+(p.type=="major"?"Major":"Minor")+'</span> '+esc(p.label)+(tag?'<span class="tag">'+tag+'</span>':'')+'<br><span style="color:#aeb8cc;font-size:12px">'+esc(p.event)+' '+hm(p.center)+'</span></div>';});
- h+='</div><div class="sub">'+status+' \u00b7 CT</div><div class="days">';
+ h+='</div><div class="sub">'+(arch?"Archived day \u00b7 periods for that date":status)+' \u00b7 CT</div><div class="days">';
  days.forEach(function(d,k){var mj=d.periods.filter(function(p){return p.type=="major";}).map(function(p){return hm(p.start);}),mn=d.periods.filter(function(p){return p.type=="minor";}).map(function(p){return hm(p.start);});
-  h+='<div class="day'+(k==0?" today":"")+'"><div class="dh">'+(k==0?"Today":esc(d.dow))+' '+esc(d.date.slice(5).replace("-","/"))+' <span class="st">'+stars(d.rating)+'</span></div><div class="mj">Maj '+esc(mj.join(", "))+'</div><div class="mn">Min '+esc(mn.join(", "))+'</div><div style="color:#aeb8cc">'+esc(d.moon_phase)+' '+d.illumination_pct+'%</div></div>';});
+  h+='<div class="day'+(k==0?" today":"")+'"><div class="dh">'+(k==0&&!arch?"Today":esc(d.dow))+' '+esc(d.date.slice(5).replace("-","/"))+' <span class="st">'+stars(d.rating)+'</span></div><div class="mj">Maj '+esc(mj.join(", "))+'</div><div class="mn">Min '+esc(mn.join(", "))+'</div><div style="color:#aeb8cc">'+esc(d.moon_phase)+' '+d.illumination_pct+'%</div></div>';});
  h+='</div><div class="sub" style="margin-top:4px;font-size:11.5px">Major = moon overhead/underfoot (2 h). Minor = moonrise/moonset (1 h). Strip shows start times. Stars: more near new/full moon and when a period lines up with sunrise or sunset.</div>';
  el("sol").innerHTML=h;}
-var SOL=null;fetch(url("solunar.json",V2)).then(function(r){return r.json();}).then(function(j){SOL=j;sol(j);setInterval(function(){sol(SOL);},60000);}).catch(function(){el("sol").innerHTML='<div class="sub">Solunar times not available yet.</div>';});
-draw();
+var SOL=null;setInterval(function(){if(SOL&&!D)sol(SOL);},60000);
+var q=(location.search.match(/[?&]date=(\d{4}-\d{2}-\d{2})/)||[])[1]||null;
+Promise.all([fetch("live/status.json?v="+V2).then(function(r){return r.json();}).catch(function(){return null;}),
+             fetch("archive/index.json?v="+V2).then(function(r){return r.json();}).catch(function(){return null;})]).then(function(a){
+ LIVE_DATE=a[0]&&a[0].date;IDX=a[1];fillSel();
+ var miss=q&&q!==LIVE_DATE&&!(IDX&&IDX.dates.indexOf(q)>=0);
+ D=(q&&q!==LIVE_DATE&&!miss)?q:null;loadDay();
+ if(miss){var bn=el("banner");bn.style.display="block";bn.textContent="No archive for "+q+" yet. Showing today.";setTimeout(function(){if(!D)bn.style.display="none";},8000);}});
 })();
 </script></body></html>

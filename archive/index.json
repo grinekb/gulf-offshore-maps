@@ -1,0 +1,40 @@
+{
+ "updated": "2026-11-25 11:31 CT",
+ "dates": [
+  "2026-11-25"
+ ],
+ "days": [
+  {
+   "date": "2026-11-25",
+   "dow": "Wed Nov 25, 2026",
+   "maps": [
+    "chl_gulf",
+    "chl_perdido",
+    "currents_gulf",
+    "currents_perdido",
+    "salinity_gulf",
+    "salinity_perdido",
+    "salinity_sat_gulf",
+    "salinity_sat_perdido",
+    "ssh_gulf",
+    "ssh_perdido",
+    "sst_alt_gulf",
+    "sst_alt_perdido",
+    "sst_blend_gulf",
+    "sst_blend_perdido",
+    "sst_gulf",
+    "sst_perdido"
+   ],
+   "picks_img": true,
+   "bytes": 2268304,
+   "picks": {
+    "marlin": "27°07.5'N 87°22.5'W · 188 nm @ 177° · near Lloyd Ridge",
+    "wahoo": "27°22.2'N 87°01.8'W · 176 nm @ 171° · near Lloyd Ridge",
+    "mahi": "28°03.0'N 87°34.5'W · 133 nm @ 180° · near Appomattox",
+    "tuna": "28°34.4'N 87°56.1'W · 103 nm @ 191° · near Appomattox"
+   },
+   "moon": "Waning Gibbous 98%",
+   "rating": 3
+  }
+ ]
+}

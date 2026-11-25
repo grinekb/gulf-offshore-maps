@@ -1,0 +1,79 @@
+{
+ "date": "2026-11-25",
+ "generated_ct": "2026-11-25 07:51 CT",
+ "layers": {
+  "sst_blend": {
+   "label": "SST blend",
+   "image_time": "2026-11-24 (daily analysis)",
+   "source": "jplMURSST41 (JPL MUR 0.01\u00b0, gap-free) via ERDDAP",
+   "files": {
+    "gulf": "sst_blend_gulf.png",
+    "perdido": "sst_blend_perdido.png"
+   }
+  },
+  "chl": {
+   "label": "Chlorophyll",
+   "image_time": "composite 2026-11-21 to 2026-11-23",
+   "source": "NOAA CoastWatch ERDDAP (OLCI, MODIS, VIIRS chlorophyll)",
+   "files": {
+    "gulf": "chl_gulf.png",
+    "perdido": "chl_perdido.png"
+   }
+  },
+  "ssh": {
+   "label": "Altimetry",
+   "image_time": "2026-11-23",
+   "source": "NOAA CoastWatch ERDDAP noaacwBLENDEDsshDaily + noaacwBLENDEDNRTcurrentsDaily",
+   "files": {
+    "gulf": "ssh_gulf.png",
+    "perdido": "ssh_perdido.png"
+   }
+  },
+  "sst": {
+   "label": "SST",
+   "image_time": "Sun Nov 22 9:15 PM CT",
+   "source": "NOAA CoastWatch ERDDAP noaacwLEOACSPOSSTL3SnrtAMNight 2026-11-23",
+   "files": {
+    "gulf": "sst_gulf.png",
+    "perdido": "sst_perdido.png"
+   }
+  },
+  "sst_alt": {
+   "label": "SST alt pass",
+   "image_time": "Sun Nov 22 12:30 PM CT",
+   "source": "NOAA CoastWatch ERDDAP noaacwLEOACSPOSSTL3SnrtPMDay 2026-11-22",
+   "files": {
+    "gulf": "sst_alt_gulf.png",
+    "perdido": "sst_alt_perdido.png"
+   }
+  },
+  "currents": {
+   "label": "Currents",
+   "image_time": "Tue Nov 24 6:00 PM CT",
+   "source": "NOAA NCEP RTOFS rtofs_20261125_n000_prog.nc",
+   "files": {
+    "gulf": "currents_gulf.png",
+    "perdido": "currents_perdido.png"
+   }
+  },
+  "salinity": {
+   "label": "Salinity",
+   "image_time": "Tue Nov 24 6:00 PM CT",
+   "source": "NOAA NCEP RTOFS rtofs_20261125_n000_prog.nc",
+   "files": {
+    "gulf": "salinity_gulf.png",
+    "perdido": "salinity_perdido.png"
+   }
+  },
+  "salinity_sat": {
+   "label": "Salinity satellite",
+   "image_time": "2026-11-23",
+   "source": "noaacwSMAPsssDaily (SMAP 0.25\u00b0) via ERDDAP",
+   "files": {
+    "gulf": "salinity_sat_gulf.png",
+    "perdido": "salinity_sat_perdido.png"
+   }
+  }
+ },
+ "errors": {}
+}
