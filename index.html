@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#e8ecf4;font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:10px}h1{font-size:20px;margin:4px 0 2px}.sub{color:#aeb8cc;font-size:12.5px}
+.bar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}button{background:#1d2540;color:#e8ecf4;border:1px solid #3a4670;border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer}
+button.on{background:#2f6fed;border-color:#2f6fed}.img{position:relative;width:100%;background:#0d1120;border-radius:8px;overflow:hidden}
+.img img{width:100%;height:auto;display:block}.cap{color:#aeb8cc;font-size:12.5px;margin:6px 0 14px}.err{color:#ff8a80;font-size:13px;padding:30px;text-align:center}
+</style></head><body><div class="w">
+<h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div>
+<div class="bar" id="layers"></div>
+<div class="bar"><button id="prev">&#9664; Prev</button><button id="next">Next &#9654;</button>
+<button id="zp">Perdido close-up</button><button id="zg">Gulf-wide</button></div>
+<div class="img"><img id="map" alt="Gulf map"></div><div class="cap" id="cap"></div>
+<div class="img"><img id="picks" alt="Today's best spots"></div>
+<div class="cap">Maps: NOAA CoastWatch, JPL MUR, NOAA RTOFS. Experimental, not for navigation. Updated each morning.</div>
+</div><script>
+var BASE="https://grinekb.github.io/gulf-offshore-maps/live/", URLS={}, L=[{"id": "sst", "label": "SST"}, {"id": "sst_alt", "label": "SST alt pass"}, {"id": "sst_blend", "label": "SST blend"}, {"id": "chl", "label": "Chlorophyll"}, {"id": "ssh", "label": "Altimetry"}, {"id": "currents", "label": "Currents"}, {"id": "salinity", "label": "Salinity"}, {"id": "salinity_sat", "label": "Salinity sat"}], i=0, z="perdido";
+function ct(){var d=new Date(Date.now()-6*3600e3);return d.toISOString().slice(0,13).replace(/[-T]/g,"");}
+var V=ct();
+function url(n){var u=URLS[n]||(BASE+n);return u+(u.indexOf("?")<0?"?":"&")+"v="+V;}
+function el(id){return document.getElementById(id);}
+function draw(){var l=L[i],n=l.id+"_"+z+".jpg",im=el("map");im.style.display="";
+ var e=el("maperr");if(e)e.remove();
+ im.onerror=function(){im.style.display="none";var d=document.createElement("div");d.id="maperr";d.className="err";d.textContent="Map not available yet: "+l.label;im.parentNode.appendChild(d);};
+ im.src=url(n);el("cap").textContent=(i+1)+" of "+L.length+" \u00b7 "+l.label+" \u00b7 "+(z=="gulf"?"Gulf-wide":"Perdido close-up")+" \u00b7 date and time are printed on the map";
+ var b=el("layers").children;for(var k=0;k<b.length;k++)b[k].className=k==i?"on":"";
+ el("zp").className=z=="perdido"?"on":"";el("zg").className=z=="gulf"?"on":"";}
+L.forEach(function(l,k){var b=document.createElement("button");b.textContent=l.label;b.onclick=function(){i=k;draw();};el("layers").appendChild(b);});
+el("prev").onclick=function(){i=(i+L.length-1)%L.length;draw();};el("next").onclick=function(){i=(i+1)%L.length;draw();};
+el("zp").onclick=function(){z="perdido";draw();};el("zg").onclick=function(){z="gulf";draw();};
+el("picks").src=url("picks.png");
+el("stamp").textContent="Viewed "+new Date().toLocaleString("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" CT \u00b7 range and bearing from Perdido Pass";
+draw();
+</script></body></html>
