@@ -3,8 +3,8 @@
 <link rel="icon" href="data:,"><title>MaKs Cast · Gulf Offshore Maps</title>
 <!-- Source: /workspace/gulf-maps/site/viewer.html (publish_live.sh copies it to viewer.html and index.html).
      Reads live/<layer>_<zoom>.jpg, live/georef.json (click -> lat/lon), live/solunar.json, live/picks.png,
-     fads.json at the site root (FAD overlay; not overwritten by the daily job),
-     and waves.json at the site root (buoy/NWS/model seas; refreshed by a separate Action, not the daily job). -->
+     and fads.json at the site root (FAD overlay; not overwritten by the daily job).
+     Ventusky waves map is an official iframe embed (embed.ventusky.com), not daily-job data. -->
 <style>
 *{box-sizing:border-box}html,body{margin:0;background:#0b1020;color:#e8ecf4;font:15px -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
 .w{max-width:1000px;margin:0 auto;padding:10px}h1{font-size:20px;margin:4px 0 2px}.sub{color:#aeb8cc;font-size:12.5px}
@@ -65,40 +65,26 @@ button.fb{border-color:#ffb300;box-shadow:inset 0 -3px 0 #ffb300}button.fb:after
 .pt .fn{font-weight:700;color:#ffcc4d}.pt .note{flex-basis:100%;color:#aeb8cc;font-size:12px}
 @media (max-width:560px){.fad b{font-size:7px}}
 
-/* Waves / marine forecast (collapsible; same card language as solunar) */
-.wav{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:10px 12px;margin:8px 0}
-.wavh{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;cursor:pointer;user-select:none}
-.wavh b{font-size:15px}.wavh .sum{color:#aeb8cc;font-size:13px;flex:1;min-width:140px}
-.wavh .ago{color:#aeb8cc;font-size:12px}
-.chev{margin-left:auto;color:#aeb8cc;font-size:12px;border:0;background:none;color:inherit;padding:4px 6px}
-.wav.collapsed .wavb{display:none}.wav.collapsed .chev:before{content:""}
-.sca{background:#3b2a05;border:1px solid #ffb300;color:#ffcc4d;border-radius:8px;padding:7px 10px;margin:8px 0 6px;font-size:13.5px;line-height:1.35}
-.sca b{color:#ffe08a}.stalew{background:#3b3315;border:1px solid #ffcc4d;color:#ffe08a;border-radius:8px;padding:7px 10px;margin:8px 0 6px;font-size:13px}
-.buoys{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
-.buoy{background:#182038;border:1px solid #2a3350;border-radius:8px;padding:8px 10px;line-height:1.35}
-.buoy .nm{font-weight:700}.buoy .nm a{color:#e8ecf4;text-decoration:none}.buoy .nm a:hover{text-decoration:underline}
-.buoy .meta{color:#aeb8cc;font-size:12px;margin-bottom:4px}
-.buoy .seas{font-size:22px;font-weight:700;color:#4fc3f7}.buoy .seas u{font-size:13px;text-decoration:none;color:#aeb8cc;font-weight:600}
-.buoy .row{font-size:13px}.buoy .offnote{color:#aeb8cc;font-size:13px}
-.buoy.stale{border-color:#ffb300}
-.wtblw{overflow-x:auto;margin:8px 0 4px;-webkit-overflow-scrolling:touch}
-.wtbl{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
-.wtbl th,.wtbl td{padding:5px 7px;text-align:left;border-bottom:1px solid #2a3350;vertical-align:top;white-space:nowrap}
-.wtbl th{color:#aeb8cc;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.02em}
-.wtbl td.d{font-weight:700}.wtbl .hi{color:#ffb74d;font-weight:700}
-.nws{margin-top:8px}
-.nwsg{margin:6px 0}.nwsg .gt{font-weight:700;font-size:13.5px;margin-bottom:4px}
-.perw{background:#182038;border:1px solid #2a3350;border-radius:8px;padding:6px 8px;margin:4px 0;font-size:13px;line-height:1.4}
-.perw b{display:block;margin-bottom:1px}
-.wsrc{color:#aeb8cc;font-size:12px;margin-top:8px;line-height:1.45}
-.wsrc a{color:#7da2ff}
-@media (max-width:560px){.buoys{grid-template-columns:1fr}.wavh .sum{flex-basis:100%;order:2}.buoy .seas{font-size:20px}}
+/* Ventusky (official embed; same card language as solunar) */
+.vsky{background:#121a30;border:1px solid #2a3350;border-radius:10px;padding:10px 12px;margin:8px 0}
+.vskyh{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.vskyh b{font-size:15px}
+.vskyh .sum{color:#aeb8cc;font-size:13px;flex:1;min-width:140px}
+.vskyopen{display:inline-block;background:#2f6fed;border:1px solid #2f6fed;color:#fff;border-radius:8px;padding:7px 12px;font-size:13.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+.vskyopen:hover{filter:brightness(1.08)}
+.vskyframe{position:relative;width:100%;height:440px;margin-top:8px;border-radius:8px;overflow:hidden;background:#0d1120;border:1px solid #2a3350}
+.vskyframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vskylinks{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:8px 0 4px}
+.vskylinks .lab{color:#aeb8cc;font-size:12.5px}
+.vskylinks a{color:#7da2ff;text-decoration:none;font-size:13.5px}
+.vskylinks a:hover{text-decoration:underline}
+@media (max-width:560px){.vskyframe{height:380px}.vskyh .sum{flex-basis:100%;order:2}.vskyopen{margin-left:auto}}
 </style></head><body><div class="w" id="wrap">
 <div class="hdr hide-fs"><div><h1>Gulf Offshore Maps</h1><div class="sub" id="stamp"></div></div>
 <div class="bar dbar" id="dbar"><button id="dprev" title="Older day">&#9664; Day</button><select id="dsel" aria-label="Pick a date"><option>Today</option></select><button id="dnext" title="Newer day">Day &#9654;</button><button id="dtoday">Today</button><span class="sub" id="dinfo"></span></div></div>
 <div class="banner" id="banner"></div>
 <div class="sol hide-fs" id="sol" title="Major = moon overhead/underfoot (2 h). Minor = moonrise/moonset (1 h). 7-day strip shows start times. Stars: more near new/full moon and when a period lines up with sunrise or sunset."><div class="sub">Loading solunar times…</div></div>
-<div class="wav hide-fs" id="wav"><div class="sub">Loading wave conditions…</div></div>
+<div class="vsky hide-fs" id="vsky"><div class="vskyh"><b>Ventusky</b><span class="sum">Waves near Perdido Pass</span><a class="vskyopen" href="https://www.ventusky.com/?p=29.8;-87.3;7&amp;l=wave" target="_blank" rel="noopener noreferrer">Open in Ventusky</a></div><div class="vskyframe"><iframe src="https://embed.ventusky.com/?p=29.8;-87.3;7&amp;l=wave&amp;pin=30.2583;-87.5567;dot;Perdido%20Pass" title="Ventusky wave forecast near Perdido Pass" loading="eager" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="vskylinks"><span class="lab">Also on Ventusky:</span><a href="https://www.ventusky.com/?p=29.8;-87.3;7&amp;l=wave" target="_blank" rel="noopener noreferrer">Waves</a><a href="https://www.ventusky.com/?p=29.8;-87.3;7&amp;l=wind-10m" target="_blank" rel="noopener noreferrer">Wind</a><a href="https://www.ventusky.com/?p=29.8;-87.3;7&amp;l=currents" target="_blank" rel="noopener noreferrer">Currents</a></div><div class="sub">Interactive map from Ventusky, centered on the Perdido Pass offshore area. Use the timeline to step through the forecast. Not for navigation.</div></div>
 <div class="bar" id="layers"></div>
 <div class="bar"><button id="prev">&#9664; Prev</button><button id="next">Next &#9654;</button>
 <button id="zp">Perdido close-up</button><button id="zg">Gulf-wide</button><button id="fadbtn" title="Show or hide fish aggregating devices" style="display:none">FADs</button><span class="sp"></span>
@@ -107,7 +93,7 @@ button.fb{border-color:#ffb300;box-shadow:inset 0 -3px 0 #ffb300}button.fb:after
 <div class="pt" id="pt"><span class="hint">Tap a FAD marker or any spot on the map for coordinates. Scroll or pinch to zoom, drag to move.</span></div>
 <div class="cap" id="cap"></div>
 <div class="hide-fs"><div class="pk"><img id="picks" alt="Today's best spots"></div>
-<div class="cap">Maps: NOAA CoastWatch, JPL MUR, NOAA RTOFS. Gold markers are FAD buoys (toggle with the FADs button). Seas and wind: NDBC buoys, NWS Mobile marine zones, and an Open-Meteo model table (not for navigation). Solunar for Perdido Pass, CT: majors = moon overhead/underfoot (2 h), minors = moonrise/moonset (1 h); 7-day strip shows start times. Values at a tapped spot come from the same data grids the maps are drawn from. Experimental, not for navigation. Updated each morning.</div></div>
+<div class="cap">Maps: NOAA CoastWatch, JPL MUR, NOAA RTOFS. Gold markers are FAD buoys (toggle with the FADs button). Wave, wind, and current forecasts: Ventusky (not for navigation). Solunar for Perdido Pass, CT: majors = moon overhead/underfoot (2 h), minors = moonrise/moonset (1 h); 7-day strip shows start times. Values at a tapped spot come from the same data grids the maps are drawn from. Experimental, not for navigation. Updated each morning.</div></div>
 </div><script>
 (function(){
 var L=[{id:"sst",label:"SST"},{id:"sst_alt",label:"SST alt pass"},{id:"sst_blend",label:"SST blend"},{id:"chl",label:"Chlorophyll"},{id:"ssh",label:"Altimetry"},{id:"currents",label:"Currents"},{id:"salinity",label:"Salinity"},{id:"salinity_sat",label:"Salinity sat"}];
@@ -244,173 +230,6 @@ function buildFads(){var box=fadBox();if(!box||!FADS)return;box.innerHTML="";
 el("fadbtn").onclick=function(){setFads(!FAD_ON);};
 fetch("fads.json?v="+V2).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){FADS=j.fads||j;var b=el("fadbtn");b.style.display="";b.className=FAD_ON?"on":"";buildFads();}).catch(function(){});
 
-/* ---------- Seas & wind (waves.json at site root; Action every ~30 min, not the daily job) ---------- */
-function ageMin(isoT){if(!isoT)return null;var t=new Date(isoT).getTime();if(!isFinite(t))return null;return (Date.now()-t)/60000;}
-function ago(isoT){var m=ageMin(isoT);if(m==null)return "";if(m<2)return "just now";if(m<60)return Math.round(m)+" min ago";var h=m/60;if(h<24)return (Math.round(h*10)/10)+" h ago";return Math.round(h/24)+" d ago";}
-function kts(v,g){if(v==null)return "—";var s=v+" kt";if(g!=null&&g>v)s+=" G "+g;return s;}
-function seasFt(v){return v==null?"—":v+" ft";}
-function seasRange(a,b){if(a==null&&b==null)return "—";if(a==null)a=b;if(b==null)b=a;var lo=Math.round(a),hi=Math.round(b);if(Math.max(a,b)<2){lo=Math.round(a*2)/2;hi=Math.round(b*2)/2;}if(lo===hi)return lo+" ft";return lo+"\u2013"+hi+" ft";}
-function windRange(c){if(!c||c.wind_kt_min==null)return "—";var a=c.wind_kt_min,b=c.wind_kt_max,s=(c.wind_dir_txt?c.wind_dir_txt+" ":"")+(a===b?a:a+"\u2013"+b)+" kt";if(c.gust_kt_max!=null&&c.gust_kt_max>b)s+=" G "+c.gust_kt_max;return s;}
-function sameText(a,b){if(!a||!b||!a.periods||!b.periods||a.periods.length!==b.periods.length)return false;for(var i=0;i<a.periods.length;i++){if((a.periods[i].text||"")!==(b.periods[i].text||""))return false;}return true;}
-function wavOpen(){var on=true;try{if(localStorage.getItem("maksCastWaves")==="0")on=false;}catch(e){}return on;}
-function setWavOpen(on){try{localStorage.setItem("maksCastWaves",on?"1":"0");}catch(e){}var w=el("wav");if(w)w.classList.toggle("collapsed",!on);var c=el("wavchev");if(c)c.textContent=on?"Hide":"Show";}
-function wav(W){
- var box=el("wav");if(!box)return;
- if(!W){box.innerHTML='<div class="sub">Wave conditions could not be loaded. Try the <a href="https://www.ndbc.noaa.gov/station_page.php?station=42012" style="color:#7da2ff">Orange Beach buoy</a> and the <a href="https://www.weather.gov/marine/mobmz" style="color:#7da2ff">NWS Mobile marine forecast</a>.</div>';return;}
- var buoys=(W.buoys||[]).filter(function(b){return b.status==="reporting";});
- var offline=(W.buoys||[]).filter(function(b){return b.status!=="reporting";});
- var b0=buoys[0]||null;
- var fetchAge=ageMin(W.fetched_at), staleFile=fetchAge!=null&&fetchAge>120, veryStale=fetchAge!=null&&fetchAge>360;
- var alerts=W.alerts||[];
- var sca=alerts.filter(function(a){return /small craft/i.test(a.event||"");})[0]||alerts[0]||null;
- var sum=[];
- if(b0&&b0.wvht_ft!=null)sum.push(b0.name+" "+b0.wvht_ft+" ft"+(b0.dpd_s!=null?" @ "+b0.dpd_s+" s":""));
- if(b0&&b0.wind_kt!=null)sum.push((b0.wind_dir_txt?b0.wind_dir_txt+" ":"")+b0.wind_kt+" kt");
- if(sca)sum.push(sca.event);
- var h='<div class="wavh" id="wavh" role="button" tabindex="0" aria-expanded="true" aria-controls="wavb"><b>Seas &amp; wind</b><span class="sum">'+esc(sum.join(" \u00b7 ")||"Current conditions and a 7-day forecast")+'</span>';
- h+='<span class="ago">'+(W.forecast_live?('Forecast '+esc(W.forecast_fetched_at_ct||'live')+(W.fetched_at_ct?' \u00b7 buoys '+esc(W.fetched_at_ct):'')):('Updated '+esc(W.fetched_at_ct||ago(W.fetched_at)||'')))+'</span>';
- h+='<button type="button" class="chev" id="wavchev">Hide</button></div><div class="wavb" id="wavb">';
- if(staleFile){h+='<div class="stalew"><b>'+(veryStale?"Buoy data is stale.":"Buoy data may be stale.")+'</b> Last fetch '+esc(W.fetched_at_ct||"")+' ('+esc(ago(W.fetched_at))+'). Forecast text below may still be current \u2014 check the NWS links.</div>';}
- if(sca){h+='<div class="sca"><b>'+esc(sca.event)+'</b>'+(sca.ends_ct?" until "+esc(sca.ends_ct):"")+(sca.headline?" \u2014 "+esc(sca.headline):"");
-  if(sca.instruction)h+='<div style="margin-top:3px;color:#d9b25a">'+esc(sca.instruction)+'</div>';
-  h+='</div>';}
- h+='<div class="buoys">';
- buoys.forEach(function(b){
-  var waveAge=ageMin(b.wave_time||b.wind_time), bstale=waveAge!=null&&waveAge>180;
-  h+='<div class="buoy'+(bstale?" stale":"")+'"><div class="nm"><a href="'+esc(b.url)+'" target="_blank" rel="noopener">'+esc(b.name)+' \u00b7 '+esc(b.id)+'</a></div>';
-  h+='<div class="meta">'+esc(b.detail||"")+(b.nm!=null?" \u00b7 "+b.nm+" nm @ "+b.bearing+"\u00b0 from Perdido Pass":"")+'</div>';
-  h+='<div class="seas">'+seasFt(b.wvht_ft)+(b.dpd_s!=null||b.mwd_txt?'<u>  '+(b.dpd_s!=null?b.dpd_s+" s":"")+(b.mwd_txt?" "+b.mwd_txt:"")+'</u>':'')+'</div>';
-  var lines=[];
-  if(b.wind_kt!=null)lines.push((b.wind_dir_txt?b.wind_dir_txt+" ":"")+kts(b.wind_kt,b.gust_kt));
-  if(b.wwave_ft!=null||b.swell_ft!=null){var bits=[];if(b.wwave_ft!=null)bits.push("wind sea "+b.wwave_ft+" ft"+(b.wwave_s!=null?" @ "+b.wwave_s+" s":"")+(b.wwave_dir?" "+b.wwave_dir:""));if(b.swell_ft!=null)bits.push("swell "+b.swell_ft+" ft"+(b.swell_s!=null?" @ "+b.swell_s+" s":"")+(b.swell_dir?" "+b.swell_dir:""));lines.push(bits.join(" \u00b7 "));}
-  if(b.wtmp_f!=null)lines.push("Water "+b.wtmp_f+"\u00b0F");else if(b.id==="42039")lines.push("Water temp not reporting");
-  if(b.atmp_f!=null)lines.push("Air "+b.atmp_f+"\u00b0F");
-  var tlabel=b.wave_time_ct||b.wind_time_ct;if(tlabel)lines.push("Observed "+tlabel+(bstale?" (old)":""));
-  lines.forEach(function(ln){h+='<div class="row">'+esc(ln)+'</div>';});
-  h+='</div>';
- });
- h+='</div>';
- offline.forEach(function(b){h+='<div class="sub" style="margin:2px 0 8px">'+(b.url?'<a href="'+esc(b.url)+'" target="_blank" rel="noopener" style="color:#aeb8cc">':'')+esc(b.name+" \u00b7 "+b.id)+(b.url?"</a>":"")+": "+esc(b.note||"Not reporting")+'</div>';});
- var days=(W.model&&W.model.days)||[];
- if(days.length){
-  h+='<div class="sub" style="margin-top:6px"><b style="color:#e8ecf4;font-size:13.5px">7-day model seas &amp; wind</b> \u00b7 daytime range (6 AM\u20136 PM CT) at a point ~12 nm and ~30 nm south of Perdido Pass. Official NWS text below may differ.</div>';
-  h+='<div class="wtblw"><table class="wtbl"><thead><tr><th>Day</th><th>Nearshore seas</th><th>Nearshore wind</th><th>Offshore seas</th><th>Offshore wind</th></tr></thead><tbody>';
-  days.forEach(function(row,i){
-   var n=row.nearshore||{},o=row.offshore||{};
-   var rough=(o.seas_ft_max!=null&&o.seas_ft_max>=6)||(n.seas_ft_max!=null&&n.seas_ft_max>=6)||(o.wind_kt_max!=null&&o.wind_kt_max>=25);
-   var lab=(i===0?"Today":esc(row.dow))+' <span style="color:#aeb8cc;font-weight:500">'+esc((row.date||"").slice(5).replace("-","/"))+'</span>';
-   h+='<tr><td class="d">'+lab+'</td><td>'+seasRange(n.seas_ft_min,n.seas_ft_max)+(n.period_s!=null?" \u00b7 "+n.period_s+" s":"")+'</td><td>'+esc(windRange(n))+'</td>';
-   h+='<td'+(rough?' class="hi"':'')+'>'+seasRange(o.seas_ft_min,o.seas_ft_max)+(o.period_s!=null?" \u00b7 "+o.period_s+" s":"")+'</td><td'+(rough?' class="hi"':'')+'>'+esc(windRange(o))+'</td></tr>';
-  });
-  h+='</tbody></table></div>';
- }
- var zones=((W.forecast||{}).zones)||[];
- var groups=[{id:"nearshore",title:"Nearshore, out 20 nm (GMZ655 / GMZ650)"},{id:"offshore",title:"Offshore, 20\u201360 nm (GMZ675 / GMZ670)"}];
- h+='<div class="nws"><div class="sub"><b style="color:#e8ecf4;font-size:13.5px">NWS Mobile marine forecast</b> \u00b7 official text</div>';
- groups.forEach(function(g){
-  var zs=zones.filter(function(z){return z.group===g.id&&(z.periods||[]).length;});
-  if(!zs.length)return;
-  var show=zs[0], extra=[];
-  zs.slice(1).forEach(function(z){if(sameText(show,z))extra.push(z.id);else extra.push(null);});
-  var label=g.title;
-  if(show.updated_ct)label+=" \u00b7 issued "+show.updated_ct;
-  h+='<div class="nwsg"><div class="gt">'+esc(label)+'</div>';
-  (show.periods||[]).forEach(function(p){h+='<div class="perw"><b>'+esc(p.name||"")+'</b>'+esc(p.text||"")+'</div>';});
-  h+='</div>';
- });
- h+='</div>';
- var links=(W.links||[]);
- h+='<div class="wsrc">Sources: ';
- h+=links.map(function(L){return '<a href="'+esc(L.url)+'" target="_blank" rel="noopener">'+esc(L.label)+'</a>';}).join(" \u00b7 ");
- h+='. Buoy observations from NDBC (via waves.json). Zone forecasts and the model table refresh in the browser from NWS Mobile and Open-Meteo. Not for navigation.</div>';
- h+='</div>';
- box.innerHTML=h;
- var toggle=function(){setWavOpen(box.classList.contains("collapsed"));};
- el("wavh").onclick=function(e){if(e.target&&e.target.id==="wavchev")return;setWavOpen(box.classList.contains("collapsed"));};
- el("wavchev").onclick=function(e){e.stopPropagation();setWavOpen(box.classList.contains("collapsed"));};
- el("wavh").onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();setWavOpen(box.classList.contains("collapsed"));}};
- setWavOpen(wavOpen());
-}
-
-
-function ctStamp(d){return (d||new Date()).toLocaleString("en-US",{timeZone:"America/Chicago",weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})+" CT";}
-function omDays(mh,wh){
- var wmap={};(wh.time||[]).forEach(function(t,i){wmap[t]=i;});
- var by={};
- (mh.time||[]).forEach(function(t,i){
-  var hour=parseInt(t.slice(11,13),10), day=t.slice(0,10), dow=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(day+"T12:00:00").getDay()];
-  if(hour<6||hour>18)return;
-  var rec=by[day]||(by[day]={date:day,dow:dow,seas:[],period_at:[],winds:[],gusts:[],dirs:[]});
-  var hs=mh.wave_height[i], tp=mh.wave_period[i], wd=mh.wave_direction[i], wi=wmap[t];
-  var wspd=wi!=null?wh.wind_speed_10m[wi]:null, gst=wi!=null?wh.wind_gusts_10m[wi]:null, wdir=wi!=null?wh.wind_direction_10m[wi]:null;
-  if(hs!=null)rec.seas.push(hs);
-  if(hs!=null&&tp!=null)rec.period_at.push([hs,tp,wd]);
-  if(wspd!=null)rec.winds.push(wspd);
-  if(gst!=null)rec.gusts.push(gst);
-  if(wdir!=null&&wspd!=null)rec.dirs.push([wspd,wdir]);
-  by[day]=rec;
- });
- function m2ft(v){return v==null?null:Math.round(v*3.28084*10)/10;}
- function comp(d){return d==null?null:["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"][Math.round(((d%360)+360)%360/22.5)%16];}
- return Object.keys(by).sort().map(function(day){
-  var rec=by[day], per=null, wdir=null, wavd=null;
-  if(rec.period_at.length){var mx=rec.period_at.reduce(function(a,b){return a[0]>b[0]?a:b;});per=Math.round(mx[1]*10)/10;wavd=comp(mx[2]);}
-  if(rec.dirs.length)wdir=comp(rec.dirs.reduce(function(a,b){return a[0]>b[0]?a:b;})[1]);
-  return {date:rec.date,dow:rec.dow,seas_ft_min:rec.seas.length?m2ft(Math.min.apply(null,rec.seas)):null,seas_ft_max:rec.seas.length?m2ft(Math.max.apply(null,rec.seas)):null,period_s:per,wave_dir_txt:wavd,
-   wind_kt_min:rec.winds.length?Math.round(Math.min.apply(null,rec.winds)):null,wind_kt_max:rec.winds.length?Math.round(Math.max.apply(null,rec.winds)):null,
-   gust_kt_max:rec.gusts.length?Math.round(Math.max.apply(null,rec.gusts)):null,wind_dir_txt:wdir};
- });
-}
-function nwsGet(url){return fetch(url,{headers:{Accept:"application/geo+json"}}).then(function(r){if(!r.ok)throw 0;return r.json();});}
-function refreshForecast(){
- var pts=[{id:"nearshore",name:"Nearshore",lat:30.06,lon:-87.55,note:"~12 nm S of Perdido Pass, near buoy 42012"},
-          {id:"offshore",name:"Offshore",lat:29.75,lon:-87.5567,note:"~30 nm S of Perdido Pass (in the 20–60 nm zone)"}];
- var zmeta=[{id:"GMZ655",group:"nearshore",name:"Coastal waters, Okaloosa–Walton line to Pensacola, out 20 nm",url:"https://forecast.weather.gov/shmrn.php?mz=gmz655"},
-            {id:"GMZ650",group:"nearshore",name:"Coastal waters, Pensacola to Pascagoula, out 20 nm",url:"https://forecast.weather.gov/shmrn.php?mz=gmz650"},
-            {id:"GMZ675",group:"offshore",name:"Waters, Okaloosa–Walton line to Pensacola, 20 to 60 nm",url:"https://forecast.weather.gov/shmrn.php?mz=gmz675"},
-            {id:"GMZ670",group:"offshore",name:"Waters, Pensacola to Pascagoula, 20 to 60 nm",url:"https://forecast.weather.gov/shmrn.php?mz=gmz670"}];
- var marine=function(p){return fetch("https://marine-api.open-meteo.com/v1/marine?latitude="+p.lat+"&longitude="+p.lon+"&hourly=wave_height,wave_period,wave_direction,wind_wave_height,swell_wave_height&forecast_days=7&timezone=America%2FChicago").then(function(r){return r.json();});};
- var wind=function(p){return fetch("https://api.open-meteo.com/v1/forecast?latitude="+p.lat+"&longitude="+p.lon+"&hourly=wind_speed_10m,wind_gusts_10m,wind_direction_10m&forecast_days=7&timezone=America%2FChicago&wind_speed_unit=kn").then(function(r){return r.json();});};
- var jobs=[nwsGet("https://api.weather.gov/alerts/active?zone=GMZ655,GMZ675,GMZ650,GMZ670")];
- zmeta.forEach(function(z){jobs.push(nwsGet("https://api.weather.gov/zones/forecast/"+z.id+"/forecast"));});
- pts.forEach(function(p){jobs.push(marine(p));jobs.push(wind(p));});
- return Promise.all(jobs).then(function(res){
-  var alertsJ=res[0], zones=[];
-  zmeta.forEach(function(z,i){
-   var p=(res[1+i].properties)||{}, upd=p.updated, updCt="";
-   try{if(upd)updCt=ctStamp(new Date(upd));}catch(e){}
-   zones.push({id:z.id,group:z.group,name:z.name,url:z.url,updated:upd,updated_ct:updCt,
-     periods:(p.periods||[]).map(function(x){return {name:x.name,text:(x.detailedForecast||x.shortForecast||"").trim()};})});
-  });
-  var alerts=(alertsJ.features||[]).map(function(f){
-   var p=f.properties||{}, ends=p.ends||p.expires, endsCt="";
-   try{if(ends)endsCt=ctStamp(new Date(ends));}catch(e){}
-   return {event:p.event,headline:p.headline,severity:p.severity,ends:ends,ends_ct:endsCt,instruction:(p.instruction||"").trim()||null,sender:p.senderName,url:f.id||p["@id"],
-     zones:(p.affectedZones||[]).map(function(u){return u.split("/").pop();}).filter(function(id){return id.indexOf("GMZ")===0;})};
-  });
-  var base=1+zmeta.length, modelPts=[], daysOut=[];
-  pts.forEach(function(p,i){var m=res[base+i*2], w=res[base+i*2+1]; modelPts.push({id:p.id,days:omDays(m.hourly,w.hourly)});});
-  if(modelPts[0]&&modelPts[0].days){
-   modelPts[0].days.forEach(function(d){
-    var row={date:d.date,dow:d.dow}; modelPts.forEach(function(mp){var cell=(mp.days||[]).filter(function(x){return x.date===d.date;})[0]; if(cell){var c={};Object.keys(cell).forEach(function(k){if(k!=="date"&&k!=="dow")c[k]=cell[k];}); row[mp.id]=c;}});
-    daysOut.push(row);
-   });
-  }
-  return {forecast:{office:"NWS Mobile AL (MOB)",office_url:"https://www.weather.gov/mob/",marine_url:"https://www.weather.gov/marine/mobmz",zones:zones},
-          alerts:alerts, model:{source:"Open-Meteo Marine + GFS wind, 7-day hourly, daytime (6 AM–6 PM CT) range",source_url:"https://open-meteo.com/",days:daysOut},
-          forecast_live:true, forecast_fetched_at_ct:ctStamp(new Date())};
- }).catch(function(){return null;});
-}
-Promise.all([
-  fetch("waves.json?v="+V2).then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;}),
-  refreshForecast()
-]).then(function(a){
-  var W=a[0], live=a[1];
-  if(!W&&!live){wav(null);return;}
-  if(!W)W={buoys:[],links:[{label:"NDBC 42012 Orange Beach",url:"https://www.ndbc.noaa.gov/station_page.php?station=42012"},{label:"NDBC 42039 Pensacola",url:"https://www.ndbc.noaa.gov/station_page.php?station=42039"},{label:"NWS nearshore (GMZ655)",url:"https://forecast.weather.gov/shmrn.php?mz=gmz655"},{label:"NWS 20–60 nm (GMZ675)",url:"https://forecast.weather.gov/shmrn.php?mz=gmz675"},{label:"NWS Mobile marine zones",url:"https://www.weather.gov/marine/mobmz"}]};
-  if(live){W.forecast=live.forecast;W.alerts=live.alerts;W.model=live.model;W.forecast_live=true;W.forecast_fetched_at_ct=live.forecast_fetched_at_ct;}
-  wav(W);
-});
 function J(n){return fetch(url(n,D?"a1":V2)).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}
 function nice(d){return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",year:"numeric"});}
 function loadDay(){loadValues();
