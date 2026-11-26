@@ -1,0 +1,528 @@
+{
+  "fetched_at": "2026-11-26T17:44:54Z",
+  "fetched_at_ct": "Thu Nov 26, 11:44 AM CT",
+  "perdido_pass": {
+    "name": "Perdido Pass",
+    "lat": 30.2583,
+    "lon": -87.5567
+  },
+  "buoys": [
+    {
+      "id": "42012",
+      "name": "Orange Beach",
+      "lat": 30.061,
+      "lon": -87.547,
+      "detail": "NDBC 42012 \u00b7 44 nm SE of Mobile, ~12 nm S of Perdido Pass",
+      "url": "https://www.ndbc.noaa.gov/station_page.php?station=42012",
+      "nm": 11.9,
+      "bearing": 178,
+      "status": "reporting",
+      "wind_dir": 300,
+      "wind_dir_txt": "WNW",
+      "wind_kt": 19.4,
+      "gust_kt": 25.3,
+      "wind_time": "2026-11-26T17:20:00Z",
+      "wind_time_ct": "Thu Nov 26, 11:20 AM CT",
+      "wvht_ft": 3.6,
+      "dpd_s": 5,
+      "mwd": 260,
+      "mwd_txt": "W",
+      "apd_s": 4.1,
+      "wave_time": "2026-11-26T16:50:00Z",
+      "wave_time_ct": "Thu Nov 26, 10:50 AM CT",
+      "wtmp_f": 70.3,
+      "atmp_f": 51.3,
+      "pres_inhg": 30.0,
+      "swell_ft": 0.7,
+      "swell_s": 7.7,
+      "swell_dir": "SSW",
+      "wwave_ft": 3.6,
+      "wwave_s": 5.3,
+      "wwave_dir": "W"
+    },
+    {
+      "id": "42039",
+      "name": "Pensacola",
+      "lat": 28.768,
+      "lon": -86.024,
+      "detail": "NDBC 42039 \u00b7 115 nm SSE of Pensacola, deep-water buoy",
+      "url": "https://www.ndbc.noaa.gov/station_page.php?station=42039",
+      "nm": 120.1,
+      "bearing": 138,
+      "status": "reporting",
+      "wind_dir": 300,
+      "wind_dir_txt": "WNW",
+      "wind_kt": 21.4,
+      "gust_kt": 27.2,
+      "wind_time": "2026-11-26T17:10:00Z",
+      "wind_time_ct": "Thu Nov 26, 11:10 AM CT",
+      "wvht_ft": 9.2,
+      "dpd_s": 8,
+      "mwd": 290,
+      "mwd_txt": "WNW",
+      "apd_s": 6.1,
+      "wave_time": "2026-11-26T17:10:00Z",
+      "wave_time_ct": "Thu Nov 26, 11:10 AM CT",
+      "wtmp_f": null,
+      "atmp_f": 63.9,
+      "pres_inhg": 29.98,
+      "swell_ft": 0.3,
+      "swell_s": 12.9,
+      "swell_dir": "W",
+      "wwave_ft": 8.9,
+      "wwave_s": 7.7,
+      "wwave_dir": "W"
+    },
+    {
+      "id": "42040",
+      "name": "Luke Offshore",
+      "lat": 29.207,
+      "lon": -88.237,
+      "detail": "NDBC 42040 \u00b7 63 nm S of Dauphin Island",
+      "url": "https://www.ndbc.noaa.gov/station_page.php?station=42040",
+      "nm": 72.4,
+      "bearing": 210,
+      "status": "offline",
+      "note": "Buoy recovered June 26, 2026. Not reporting."
+    }
+  ],
+  "forecast": {
+    "office": "NWS Mobile AL (MOB)",
+    "office_url": "https://www.weather.gov/mob/",
+    "marine_url": "https://www.weather.gov/marine/mobmz",
+    "zones": [
+      {
+        "id": "GMZ655",
+        "group": "nearshore",
+        "name": "Coastal waters, Okaloosa\u2013Walton line to Pensacola, out 20 nm",
+        "url": "https://forecast.weather.gov/shmrn.php?mz=gmz655",
+        "updated": "2026-11-26T08:07:00-06:00",
+        "updated_ct": "Thu Nov 26, 8:07 AM CT",
+        "periods": [
+          {
+            "name": "Today",
+            "text": "Northwest winds around 20 knots with gusts up to 25 knots. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 4 feet at 5 seconds and southeast 2 feet at 7 seconds."
+          },
+          {
+            "name": "Tonight",
+            "text": "Northwest winds 20 to 25 knots, diminishing to 15 to 20 knots after midnight. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 5 feet at 6 seconds and east 1 foot at 6 seconds."
+          },
+          {
+            "name": "Friday",
+            "text": "West winds 10 to 15 knots. Seas 2 to 4 feet, occasionally to 5 feet. Wave Detail: West 4 feet at 5 seconds."
+          },
+          {
+            "name": "Friday Night",
+            "text": "Northwest winds 10 to 15 knots, diminishing to 5 to 10 knots after midnight. Seas around 2 feet. Wave Detail: West 2 feet at 5 seconds."
+          },
+          {
+            "name": "Saturday",
+            "text": "Northwest winds around 5 knots, becoming south around 5 knots in the afternoon. Seas 1 foot or less. Wave Detail: West 1 foot at 4 seconds."
+          },
+          {
+            "name": "Saturday Night",
+            "text": "South winds 5 to 10 knots, increasing to 10 to 15 knots with gusts up to 20 knots after midnight. Seas 1 foot or less, then 2 to 3 feet after midnight. Wave Detail: Southwest 1 foot at 4 seconds, becoming south 2 feet at 4 seconds."
+          },
+          {
+            "name": "Sunday",
+            "text": "South winds 15 to 20 knots, increasing to 20 to 25 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet, building to 5 to 8 feet, occasionally to 10 feet in the afternoon. Wave Detail: South 5 feet at 5 seconds, becoming south 8 feet at 7 seconds. A chance of showers in the morning, then showers likely with a chance of thunderstorms in the afternoon."
+          },
+          {
+            "name": "Sunday Night",
+            "text": "West winds 20 to 25 knots, becoming north 15 to 20 knots after midnight. Seas 5 to 8 feet, occasionally to 10 feet, subsiding to 4 to 6 feet, occasionally to 8 feet after midnight. Wave Detail: Southwest 8 feet at 7 seconds, becoming southwest 6 feet at 7 seconds. A chance of showers with a slight chance of thunderstorms in the evening, then a slight chance of showers after midnight."
+          },
+          {
+            "name": "Monday",
+            "text": "North winds 10 to 15 knots, diminishing to 5 to 10 knots in the afternoon. Seas 2 to 4 feet, occasionally to 5 feet. Wave Detail: West 4 feet at 6 seconds and northeast 2 feet at 3 seconds."
+          },
+          {
+            "name": "Monday Night",
+            "text": "Northeast winds 5 to 10 knots. Seas 2 to 3 feet. Wave Detail: Northeast 2 feet at 5 seconds and southwest 2 feet at 6 seconds. A slight chance of showers. Winds and seas higher in and near thunderstorms."
+          }
+        ]
+      },
+      {
+        "id": "GMZ650",
+        "group": "nearshore",
+        "name": "Coastal waters, Pensacola to Pascagoula, out 20 nm",
+        "url": "https://forecast.weather.gov/shmrn.php?mz=gmz650",
+        "updated": "2026-11-26T08:07:00-06:00",
+        "updated_ct": "Thu Nov 26, 8:07 AM CT",
+        "periods": [
+          {
+            "name": "Today",
+            "text": "Northwest winds around 20 knots with gusts up to 25 knots. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 4 feet at 5 seconds and southeast 2 feet at 7 seconds."
+          },
+          {
+            "name": "Tonight",
+            "text": "Northwest winds 20 to 25 knots, diminishing to 15 to 20 knots after midnight. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 5 feet at 6 seconds and east 1 foot at 6 seconds."
+          },
+          {
+            "name": "Friday",
+            "text": "West winds 10 to 15 knots. Seas 2 to 4 feet, occasionally to 5 feet. Wave Detail: West 4 feet at 5 seconds."
+          },
+          {
+            "name": "Friday Night",
+            "text": "Northwest winds 10 to 15 knots, diminishing to 5 to 10 knots after midnight. Seas around 2 feet. Wave Detail: West 2 feet at 5 seconds."
+          },
+          {
+            "name": "Saturday",
+            "text": "Northwest winds around 5 knots, becoming south around 5 knots in the afternoon. Seas 1 foot or less. Wave Detail: West 1 foot at 4 seconds."
+          },
+          {
+            "name": "Saturday Night",
+            "text": "South winds 5 to 10 knots, increasing to 10 to 15 knots with gusts up to 20 knots after midnight. Seas 1 foot or less, then 2 to 3 feet after midnight. Wave Detail: Southwest 1 foot at 4 seconds, becoming south 2 feet at 4 seconds."
+          },
+          {
+            "name": "Sunday",
+            "text": "South winds 15 to 20 knots, increasing to 20 to 25 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet, building to 5 to 8 feet, occasionally to 10 feet in the afternoon. Wave Detail: South 5 feet at 5 seconds, becoming south 8 feet at 7 seconds. A chance of showers in the morning, then showers likely with a chance of thunderstorms in the afternoon."
+          },
+          {
+            "name": "Sunday Night",
+            "text": "West winds 20 to 25 knots, becoming north 15 to 20 knots after midnight. Seas 5 to 8 feet, occasionally to 10 feet, subsiding to 4 to 6 feet, occasionally to 8 feet after midnight. Wave Detail: Southwest 8 feet at 7 seconds, becoming southwest 6 feet at 7 seconds. A chance of showers with a slight chance of thunderstorms in the evening, then a slight chance of showers after midnight."
+          },
+          {
+            "name": "Monday",
+            "text": "North winds 10 to 15 knots, diminishing to 5 to 10 knots in the afternoon. Seas 2 to 4 feet, occasionally to 5 feet. Wave Detail: West 4 feet at 6 seconds and northeast 2 feet at 3 seconds."
+          },
+          {
+            "name": "Monday Night",
+            "text": "Northeast winds 5 to 10 knots. Seas 2 to 3 feet. Wave Detail: Northeast 2 feet at 5 seconds and southwest 2 feet at 6 seconds. A slight chance of showers. Winds and seas higher in and near thunderstorms."
+          }
+        ]
+      },
+      {
+        "id": "GMZ675",
+        "group": "offshore",
+        "name": "Waters, Okaloosa\u2013Walton line to Pensacola, 20 to 60 nm",
+        "url": "https://forecast.weather.gov/shmrn.php?mz=gmz675",
+        "updated": "2026-11-26T08:07:00-06:00",
+        "updated_ct": "Thu Nov 26, 8:07 AM CT",
+        "periods": [
+          {
+            "name": "Today",
+            "text": "Northwest winds 20 to 25 knots. Seas 5 to 7 feet, occasionally to 9 feet. Wave Detail: Northwest 6 feet at 6 seconds and east 2 feet at 7 seconds."
+          },
+          {
+            "name": "Tonight",
+            "text": "Northwest winds 20 to 25 knots, diminishing to 15 to 20 knots after midnight. Seas 5 to 7 feet, occasionally to 9 feet. Wave Detail: West 7 feet at 6 seconds."
+          },
+          {
+            "name": "Friday",
+            "text": "Northwest winds 15 to 20 knots, becoming west 10 to 15 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: Northwest 5 feet at 6 seconds."
+          },
+          {
+            "name": "Friday Night",
+            "text": "Northwest winds 10 to 15 knots, diminishing to 5 to 10 knots after midnight. Seas 2 to 3 feet. Wave Detail: Northwest 3 feet at 5 seconds."
+          },
+          {
+            "name": "Saturday",
+            "text": "Northwest winds around 5 knots, becoming south in the afternoon. Seas around 2 feet in the morning, then 1 foot or less. Wave Detail: Northwest 1 foot at 5 seconds, becoming west 1 foot at 5 seconds."
+          },
+          {
+            "name": "Saturday Night",
+            "text": "South winds 10 to 15 knots. Seas 1 foot or less, then 2 to 3 feet after midnight. Wave Detail: Southwest 1 foot at 4 seconds, becoming south 3 feet at 4 seconds."
+          },
+          {
+            "name": "Sunday",
+            "text": "South winds 20 to 25 knots, increasing to 25 to 30 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet, building to 5 to 8 feet, occasionally to 10 feet in the afternoon. Wave Detail: South 5 feet at 5 seconds, becoming south 8 feet at 7 seconds. A chance of showers in the morning, then showers with a chance of thunderstorms in the afternoon."
+          },
+          {
+            "name": "Sunday Night",
+            "text": "Southwest winds 20 to 25 knots, becoming north after midnight. Seas 5 to 8 feet, occasionally to 10 feet. Wave Detail: Southwest 8 feet at 7 seconds. Showers likely with a slight chance of thunderstorms in the evening, then a slight chance of showers after midnight."
+          },
+          {
+            "name": "Monday",
+            "text": "North winds 15 to 20 knots, diminishing to 10 to 15 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 5 feet at 6 seconds."
+          },
+          {
+            "name": "Monday Night",
+            "text": "Northeast winds around 10 knots. Seas 2 to 3 feet. Wave Detail: Southwest 3 feet at 6 seconds and northeast 2 feet at 5 seconds. Winds and seas higher in and near thunderstorms."
+          }
+        ]
+      },
+      {
+        "id": "GMZ670",
+        "group": "offshore",
+        "name": "Waters, Pensacola to Pascagoula, 20 to 60 nm",
+        "url": "https://forecast.weather.gov/shmrn.php?mz=gmz670",
+        "updated": "2026-11-26T08:07:00-06:00",
+        "updated_ct": "Thu Nov 26, 8:07 AM CT",
+        "periods": [
+          {
+            "name": "Today",
+            "text": "Northwest winds 20 to 25 knots. Seas 5 to 7 feet, occasionally to 9 feet. Wave Detail: Northwest 6 feet at 6 seconds and east 2 feet at 7 seconds."
+          },
+          {
+            "name": "Tonight",
+            "text": "Northwest winds 20 to 25 knots, diminishing to 15 to 20 knots after midnight. Seas 5 to 7 feet, occasionally to 9 feet. Wave Detail: West 7 feet at 6 seconds."
+          },
+          {
+            "name": "Friday",
+            "text": "Northwest winds 15 to 20 knots, becoming west 10 to 15 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: Northwest 5 feet at 6 seconds."
+          },
+          {
+            "name": "Friday Night",
+            "text": "Northwest winds 10 to 15 knots, diminishing to 5 to 10 knots after midnight. Seas 2 to 3 feet. Wave Detail: Northwest 3 feet at 5 seconds."
+          },
+          {
+            "name": "Saturday",
+            "text": "Northwest winds around 5 knots, becoming south in the afternoon. Seas around 2 feet in the morning, then 1 foot or less. Wave Detail: Northwest 1 foot at 5 seconds, becoming west 1 foot at 5 seconds."
+          },
+          {
+            "name": "Saturday Night",
+            "text": "South winds 10 to 15 knots. Seas 1 foot or less, then 2 to 3 feet after midnight. Wave Detail: Southwest 1 foot at 4 seconds, becoming south 3 feet at 4 seconds."
+          },
+          {
+            "name": "Sunday",
+            "text": "South winds 20 to 25 knots, increasing to 25 to 30 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet, building to 5 to 8 feet, occasionally to 10 feet in the afternoon. Wave Detail: South 5 feet at 5 seconds, becoming south 8 feet at 7 seconds. A chance of showers in the morning, then showers with a chance of thunderstorms in the afternoon."
+          },
+          {
+            "name": "Sunday Night",
+            "text": "Southwest winds 20 to 25 knots, becoming north after midnight. Seas 5 to 8 feet, occasionally to 10 feet. Wave Detail: Southwest 8 feet at 7 seconds. Showers likely with a slight chance of thunderstorms in the evening, then a slight chance of showers after midnight."
+          },
+          {
+            "name": "Monday",
+            "text": "North winds 15 to 20 knots, diminishing to 10 to 15 knots in the afternoon. Seas 3 to 5 feet, occasionally to 6 feet. Wave Detail: West 5 feet at 6 seconds."
+          },
+          {
+            "name": "Monday Night",
+            "text": "Northeast winds around 10 knots. Seas 2 to 3 feet. Wave Detail: Southwest 3 feet at 6 seconds and northeast 2 feet at 5 seconds. Winds and seas higher in and near thunderstorms."
+          }
+        ]
+      }
+    ]
+  },
+  "alerts": [
+    {
+      "event": "Small Craft Advisory",
+      "headline": "Small Craft Advisory issued November 26 at 9:07AM CST until November 27 at 6:00AM CST by NWS Mobile AL",
+      "severity": "Minor",
+      "ends": "2026-11-27T06:00:00-06:00",
+      "ends_ct": "Fri Nov 27, 6:00 AM CT",
+      "instruction": "Inexperienced mariners, especially those operating smaller\nvessels, should avoid navigating in hazardous conditions.",
+      "description": "* WHAT...Northwest winds 15 to 25 kt and seas 4 to 7 ft.\n\n* WHERE...Coastal waters from Pensacola FL to Pascagoula MS out\n20 NM, Coastal waters from Okaloosa Walton County Line FL to\nPensacola FL out 20 NM, Waters from Pensacola FL to Pascagoula\nMS from 20 to 60 NM and Waters from Okaloosa Walton County\nLine FL to Pensacola FL from 20 to 60 NM.\n\n* WHEN...Until 6 AM CST Friday.\n\n* IMPACTS...Conditions will be hazardous to small craft.",
+      "sender": "NWS Mobile AL",
+      "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.1d3db3e01ebb95705e3697ee8055620276b1f6aa.002.1",
+      "zones": [
+        "GMZ650",
+        "GMZ655",
+        "GMZ670",
+        "GMZ675"
+      ]
+    }
+  ],
+  "model": {
+    "source": "Open-Meteo Marine + GFS wind, 7-day hourly, daytime (6 AM\u20136 PM CT) range",
+    "source_url": "https://open-meteo.com/",
+    "points": [
+      {
+        "id": "nearshore",
+        "name": "Nearshore",
+        "lat": 30.06,
+        "lon": -87.55,
+        "note": "~12 nm S of Perdido Pass, near buoy 42012"
+      },
+      {
+        "id": "offshore",
+        "name": "Offshore",
+        "lat": 29.75,
+        "lon": -87.5567,
+        "note": "~30 nm S of Perdido Pass (in the 20\u201360 nm zone)"
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-26",
+        "dow": "Thu",
+        "nearshore": {
+          "seas_ft_min": 4.2,
+          "seas_ft_max": 4.7,
+          "period_s": 5.0,
+          "wave_dir_txt": "NW",
+          "wind_kt_min": 17.0,
+          "wind_kt_max": 24.0,
+          "gust_kt_max": 26.0,
+          "wind_dir_txt": "WNW"
+        },
+        "offshore": {
+          "seas_ft_min": 4.9,
+          "seas_ft_max": 5.3,
+          "period_s": 5.2,
+          "wave_dir_txt": "NW",
+          "wind_kt_min": 18.0,
+          "wind_kt_max": 26.0,
+          "gust_kt_max": 28.0,
+          "wind_dir_txt": "WNW"
+        }
+      },
+      {
+        "date": "2026-11-27",
+        "dow": "Fri",
+        "nearshore": {
+          "seas_ft_min": 2.0,
+          "seas_ft_max": 3.7,
+          "period_s": 4.4,
+          "wave_dir_txt": "WNW",
+          "wind_kt_min": 12.0,
+          "wind_kt_max": 20.0,
+          "gust_kt_max": 22.0,
+          "wind_dir_txt": "WNW"
+        },
+        "offshore": {
+          "seas_ft_min": 2.2,
+          "seas_ft_max": 3.9,
+          "period_s": 4.6,
+          "wave_dir_txt": "WNW",
+          "wind_kt_min": 10.0,
+          "wind_kt_max": 20.0,
+          "gust_kt_max": 22.0,
+          "wind_dir_txt": "WNW"
+        }
+      },
+      {
+        "date": "2026-11-28",
+        "dow": "Sat",
+        "nearshore": {
+          "seas_ft_min": 0.7,
+          "seas_ft_max": 1.3,
+          "period_s": 3.5,
+          "wave_dir_txt": "WSW",
+          "wind_kt_min": 4.0,
+          "wind_kt_max": 8.0,
+          "gust_kt_max": 10.0,
+          "wind_dir_txt": "SSW"
+        },
+        "offshore": {
+          "seas_ft_min": 0.7,
+          "seas_ft_max": 1.4,
+          "period_s": 3.6,
+          "wave_dir_txt": "W",
+          "wind_kt_min": 3.0,
+          "wind_kt_max": 10.0,
+          "gust_kt_max": 8.0,
+          "wind_dir_txt": "SSW"
+        }
+      },
+      {
+        "date": "2026-11-29",
+        "dow": "Sun",
+        "nearshore": {
+          "seas_ft_min": 2.1,
+          "seas_ft_max": 3.9,
+          "period_s": 4.4,
+          "wave_dir_txt": "SSW",
+          "wind_kt_min": 14.0,
+          "wind_kt_max": 27.0,
+          "gust_kt_max": 36.0,
+          "wind_dir_txt": "SSW"
+        },
+        "offshore": {
+          "seas_ft_min": 2.5,
+          "seas_ft_max": 3.9,
+          "period_s": 4.5,
+          "wave_dir_txt": "SSW",
+          "wind_kt_min": 15.0,
+          "wind_kt_max": 28.0,
+          "gust_kt_max": 34.0,
+          "wind_dir_txt": "SSW"
+        }
+      },
+      {
+        "date": "2026-11-30",
+        "dow": "Mon",
+        "nearshore": {
+          "seas_ft_min": 2.2,
+          "seas_ft_max": 3.2,
+          "period_s": 4.2,
+          "wave_dir_txt": "NNE",
+          "wind_kt_min": 8.0,
+          "wind_kt_max": 18.0,
+          "gust_kt_max": 26.0,
+          "wind_dir_txt": "NNE"
+        },
+        "offshore": {
+          "seas_ft_min": 2.7,
+          "seas_ft_max": 3.8,
+          "period_s": 4.4,
+          "wave_dir_txt": "NNE",
+          "wind_kt_min": 10.0,
+          "wind_kt_max": 19.0,
+          "gust_kt_max": 24.0,
+          "wind_dir_txt": "NNE"
+        }
+      },
+      {
+        "date": "2026-12-01",
+        "dow": "Tue",
+        "nearshore": {
+          "seas_ft_min": 1.6,
+          "seas_ft_max": 2.2,
+          "period_s": 4.0,
+          "wave_dir_txt": "E",
+          "wind_kt_min": 5.0,
+          "wind_kt_max": 12.0,
+          "gust_kt_max": 8.0,
+          "wind_dir_txt": "NE"
+        },
+        "offshore": {
+          "seas_ft_min": 1.8,
+          "seas_ft_max": 2.4,
+          "period_s": 4.0,
+          "wave_dir_txt": "E",
+          "wind_kt_min": 7.0,
+          "wind_kt_max": 10.0,
+          "gust_kt_max": 8.0,
+          "wind_dir_txt": "ENE"
+        }
+      },
+      {
+        "date": "2026-12-02",
+        "dow": "Wed",
+        "nearshore": {
+          "seas_ft_min": 0.7,
+          "seas_ft_max": 1.0,
+          "period_s": 4.7,
+          "wave_dir_txt": "SE",
+          "wind_kt_min": 11.0,
+          "wind_kt_max": 14.0,
+          "gust_kt_max": 10.0,
+          "wind_dir_txt": "E"
+        },
+        "offshore": {
+          "seas_ft_min": 0.8,
+          "seas_ft_max": 1.0,
+          "period_s": 4.6,
+          "wave_dir_txt": "SE",
+          "wind_kt_min": 11.0,
+          "wind_kt_max": 17.0,
+          "gust_kt_max": 11.0,
+          "wind_dir_txt": "ESE"
+        }
+      }
+    ]
+  },
+  "links": [
+    {
+      "label": "NDBC 42012 Orange Beach",
+      "url": "https://www.ndbc.noaa.gov/station_page.php?station=42012"
+    },
+    {
+      "label": "NDBC 42039 Pensacola",
+      "url": "https://www.ndbc.noaa.gov/station_page.php?station=42039"
+    },
+    {
+      "label": "NWS nearshore (GMZ655)",
+      "url": "https://forecast.weather.gov/shmrn.php?mz=gmz655"
+    },
+    {
+      "label": "NWS 20\u201360 nm (GMZ675)",
+      "url": "https://forecast.weather.gov/shmrn.php?mz=gmz675"
+    },
+    {
+      "label": "NWS Mobile marine zones",
+      "url": "https://www.weather.gov/marine/mobmz"
+    }
+  ],
+  "errors": []
+}
