@@ -322,7 +322,7 @@ function wav(W){
  var links=(W.links||[]);
  h+='<div class="wsrc">Sources: ';
  h+=links.map(function(L){return '<a href="'+esc(L.url)+'" target="_blank" rel="noopener">'+esc(L.label)+'</a>';}).join(" \u00b7 ");
- h+='. Buoy observations from NDBC; zone forecasts from NWS Mobile; day-by-day table from Open-Meteo (model, not a buoy). Refreshed about every 30 minutes. Not for navigation.</div>';
+ h+='. Buoy observations from NDBC (via waves.json). Zone forecasts and the model table refresh in the browser from NWS Mobile and Open-Meteo. Not for navigation.</div>';
  h+='</div>';
  box.innerHTML=h;
  var toggle=function(){setWavOpen(box.classList.contains("collapsed"));};
