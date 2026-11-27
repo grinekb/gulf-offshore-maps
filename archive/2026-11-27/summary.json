@@ -1,0 +1,515 @@
+{
+ "date": "2026-11-27",
+ "origin": {
+  "name": "Perdido Pass",
+  "lat": 30.2583,
+  "lon": -87.5567
+ },
+ "notes": [
+  "Some layers are older data (newest unavailable): sst 2026-11-22, sst_alt 2026-11-23, chl 2026-11-23, ssh 2026-11-24, salinity_sat 2026-11-24.",
+  "Spot picks are rule-of-thumb reads of the maps, to be checked against Hilton's for the 30-day comparison."
+ ],
+ "sst_breaks": [
+  {
+   "lat": 27.74,
+   "lon": -88.73,
+   "ll": "27\u00b044.4'N 88\u00b043.8'W",
+   "nm": 163.3,
+   "bearing": 202,
+   "depth_ft": 5624,
+   "near": {
+    "name": "Ursa",
+    "nm": 31.8
+   },
+   "cold_f": 77.6,
+   "warm_f": 79.5,
+   "break_f_per_nm": 0.4
+  },
+  {
+   "lat": 27.93,
+   "lon": -88.52,
+   "ll": "27\u00b055.8'N 88\u00b031.2'W",
+   "nm": 148.6,
+   "bearing": 200,
+   "depth_ft": 7405,
+   "near": {
+    "name": "Thunder Hawk",
+    "nm": 21.2
+   },
+   "cold_f": 77.3,
+   "warm_f": 79.2,
+   "break_f_per_nm": 0.39
+  },
+  {
+   "lat": 27.47,
+   "lon": -87.26,
+   "ll": "27\u00b028.2'N 87\u00b015.6'W",
+   "nm": 168.1,
+   "bearing": 175,
+   "depth_ft": 9866,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 18.9
+   },
+   "cold_f": 79.3,
+   "warm_f": 80.9,
+   "break_f_per_nm": 0.32
+  },
+  {
+   "lat": 27.3,
+   "lon": -87.02,
+   "ll": "27\u00b018.0'N 87\u00b001.2'W",
+   "nm": 179.8,
+   "bearing": 171,
+   "depth_ft": 9866,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 12.3
+   },
+   "cold_f": 79.8,
+   "warm_f": 81.6,
+   "break_f_per_nm": 0.32
+  },
+  {
+   "lat": 28.12,
+   "lon": -88.44,
+   "ll": "28\u00b007.2'N 88\u00b026.4'W",
+   "nm": 136.5,
+   "bearing": 200,
+   "depth_ft": 6523,
+   "near": {
+    "name": "Thunder Hawk",
+    "nm": 9.1
+   },
+   "cold_f": 77.3,
+   "warm_f": 78.6,
+   "break_f_per_nm": 0.3
+  },
+  {
+   "lat": 28.04,
+   "lon": -87.71,
+   "ll": "28\u00b002.4'N 87\u00b042.6'W",
+   "nm": 133.4,
+   "bearing": 183,
+   "depth_ft": 8629,
+   "near": {
+    "name": "Appomattox",
+    "nm": 34.2
+   },
+   "cold_f": 77.7,
+   "warm_f": 79.2,
+   "break_f_per_nm": 0.27
+  }
+ ],
+ "sst_breaks_source": "jplMURSST41 (JPL MUR 0.01\u00b0, gap-free) 2026-11-24",
+ "currents": [
+  {
+   "lat": 27.304,
+   "lon": -85.84,
+   "ll": "27\u00b018.2'N 85\u00b050.4'W",
+   "nm": 199.1,
+   "bearing": 153,
+   "depth_ft": 10644,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 57.7
+   },
+   "knots": 2.31,
+   "toward_deg": 144
+  },
+  {
+   "lat": 28.857,
+   "lon": -89.04,
+   "ll": "28\u00b051.4'N 89\u00b002.4'W",
+   "nm": 114.4,
+   "bearing": 223,
+   "depth_ft": 650,
+   "near": {
+    "name": "Ursa",
+    "nm": 42.3
+   },
+   "knots": 2.16,
+   "toward_deg": 220
+  },
+  {
+   "lat": 27.729,
+   "lon": -86.16,
+   "ll": "27\u00b043.8'N 86\u00b009.6'W",
+   "nm": 168.6,
+   "bearing": 154,
+   "depth_ft": 10443,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 42.4
+   },
+   "knots": 1.9,
+   "toward_deg": 125
+  }
+ ],
+ "sst_pass": {
+  "dataset": "noaacwLEOACSPOSSTL3SnrtAMNight",
+  "image_time": "Sun Nov 22 9:15 PM CT",
+  "clear_pct_perdido": 46
+ },
+ "chl_edges": [
+  {
+   "lat": 29.063,
+   "lon": -88.738,
+   "ll": "29\u00b003.8'N 88\u00b044.3'W",
+   "nm": 94.6,
+   "bearing": 221,
+   "depth_ft": 361,
+   "near": {
+    "name": "Ram Powell",
+    "nm": 33.9
+   },
+   "clear_mgm3": 0.15,
+   "green_mgm3": 0.44
+  },
+  {
+   "lat": 27.938,
+   "lon": -86.638,
+   "ll": "27\u00b056.3'N 86\u00b038.3'W",
+   "nm": 147.4,
+   "bearing": 161,
+   "depth_ft": 9869,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 31.1
+   },
+   "clear_mgm3": 0.13,
+   "green_mgm3": 0.22
+  },
+  {
+   "lat": 27.713,
+   "lon": -86.15,
+   "ll": "27\u00b042.8'N 86\u00b009.0'W",
+   "nm": 169.8,
+   "bearing": 154,
+   "depth_ft": 10453,
+   "near": {
+    "name": "Lloyd Ridge",
+    "nm": 42.6
+   },
+   "clear_mgm3": 0.14,
+   "green_mgm3": 0.23
+  },
+  {
+   "lat": 28.05,
+   "lon": -87.575,
+   "ll": "28\u00b003.0'N 87\u00b034.5'W",
+   "nm": 132.6,
+   "bearing": 180,
+   "depth_ft": 8888,
+   "near": {
+    "name": "Appomattox",
+    "nm": 36.7
+   },
+   "clear_mgm3": 0.12,
+   "green_mgm3": 0.19
+  },
+  {
+   "lat": 27.413,
+   "lon": -88.55,
+   "ll": "27\u00b024.8'N 88\u00b033.0'W",
+   "nm": 178.7,
+   "bearing": 197,
+   "depth_ft": 7212,
+   "near": {
+    "name": "Thunder Hawk",
+    "nm": 51.9
+   },
+   "clear_mgm3": 0.11,
+   "green_mgm3": 0.14
+  }
+ ],
+ "chl_passes": [
+  "Sentinel-3A OLCI 2026-11-22",
+  "Sentinel-3A OLCI 2026-11-23",
+  "Aqua MODIS 2026-11-22"
+ ],
+ "altimetry": {
+  "high": {
+   "lat": 27.375,
+   "lon": -90.875,
+   "ll": "27\u00b022.5'N 90\u00b052.5'W",
+   "nm": 245.8,
+   "bearing": 226,
+   "depth_ft": 4328,
+   "near": {
+    "name": "Mars",
+    "nm": 99.9
+   },
+   "sla_cm": 37.1
+  },
+  "low": {
+   "lat": 26.625,
+   "lon": -89.375,
+   "ll": "26\u00b037.5'N 89\u00b022.5'W",
+   "nm": 238.3,
+   "bearing": 204,
+   "depth_ft": 9193,
+   "near": {
+    "name": "Ursa",
+    "nm": 92.9
+   },
+   "sla_cm": -25.4
+  },
+  "edges": [
+   {
+    "lat": 28.375,
+    "lon": -89.375,
+    "ll": "28\u00b022.5'N 89\u00b022.5'W",
+    "nm": 147.8,
+    "bearing": 221,
+    "depth_ft": 2297,
+    "near": {
+     "name": "Mars",
+     "nm": 14.7
+    },
+    "low_cm": -0.6,
+    "high_cm": 16.6
+   },
+   {
+    "lat": 27.875,
+    "lon": -90.125,
+    "ll": "27\u00b052.5'N 90\u00b007.5'W",
+    "nm": 196.6,
+    "bearing": 224,
+    "depth_ft": 2106,
+    "near": {
+     "name": "Mars",
+     "nm": 51.0
+    },
+    "low_cm": 2.2,
+    "high_cm": 16.0
+   },
+   {
+    "lat": 27.125,
+    "lon": -88.625,
+    "ll": "27\u00b007.5'N 88\u00b037.5'W",
+    "nm": 196.4,
+    "bearing": 197,
+    "depth_ft": 7884,
+    "near": {
+     "name": "Ursa",
+     "nm": 66.8
+    },
+    "low_cm": -11.9,
+    "high_cm": 1.1
+   }
+  ]
+ },
+ "older_layers": {
+  "sst": "2026-11-22",
+  "sst_alt": "2026-11-23",
+  "chl": "2026-11-23",
+  "ssh": "2026-11-24",
+  "salinity_sat": "2026-11-24"
+ },
+ "rig_sst": [
+  {
+   "lat": 29.229,
+   "lon": -87.781,
+   "ll": "29\u00b013.7'N 87\u00b046.9'W",
+   "nm": 62.9,
+   "bearing": 191,
+   "depth_ft": 1782,
+   "near": {
+    "name": "Petronius",
+    "nm": 0.0
+   },
+   "rig": "Petronius",
+   "sst_f": 75.3
+  },
+  {
+   "lat": 29.108,
+   "lon": -87.944,
+   "ll": "29\u00b006.5'N 87\u00b056.6'W",
+   "nm": 72.0,
+   "bearing": 196,
+   "depth_ft": 3202,
+   "near": {
+    "name": "Marlin TLP",
+    "nm": 0.0
+   },
+   "rig": "Marlin TLP",
+   "sst_f": 75.5
+  },
+  {
+   "lat": 29.061,
+   "lon": -88.092,
+   "ll": "29\u00b003.6'N 88\u00b005.5'W",
+   "nm": 77.1,
+   "bearing": 201,
+   "depth_ft": 3212,
+   "near": {
+    "name": "Ram Powell",
+    "nm": 0.0
+   },
+   "rig": "Ram Powell",
+   "sst_f": 75.3
+  },
+  {
+   "lat": 28.866,
+   "lon": -88.056,
+   "ll": "28\u00b052.0'N 88\u00b003.4'W",
+   "nm": 87.6,
+   "bearing": 197,
+   "depth_ft": 5473,
+   "near": {
+    "name": "Horn Mountain",
+    "nm": 0.0
+   },
+   "rig": "Horn Mountain",
+   "sst_f": 76.4
+  },
+  {
+   "lat": 28.573,
+   "lon": -87.934,
+   "ll": "28\u00b034.4'N 87\u00b056.1'W",
+   "nm": 103.1,
+   "bearing": 191,
+   "depth_ft": 7464,
+   "near": {
+    "name": "Appomattox",
+    "nm": 0.0
+   },
+   "rig": "Appomattox",
+   "sst_f": 77.3
+  },
+  {
+   "lat": 28.521,
+   "lon": -88.289,
+   "ll": "28\u00b031.3'N 88\u00b017.3'W",
+   "nm": 111.1,
+   "bearing": 200,
+   "depth_ft": 6359,
+   "near": {
+    "name": "Na Kika",
+    "nm": 0.0
+   },
+   "rig": "Na Kika",
+   "sst_f": 76.4
+  },
+  {
+   "lat": 28.341,
+   "lon": -88.266,
+   "ll": "28\u00b020.5'N 88\u00b015.9'W",
+   "nm": 120.9,
+   "bearing": 198,
+   "depth_ft": 6582,
+   "near": {
+    "name": "Blind Faith",
+    "nm": 0.0
+   },
+   "rig": "Blind Faith",
+   "sst_f": 77.0
+  },
+  {
+   "lat": 28.267,
+   "lon": -88.399,
+   "ll": "28\u00b016.0'N 88\u00b023.9'W",
+   "nm": 127.4,
+   "bearing": 200,
+   "depth_ft": 6076,
+   "near": {
+    "name": "Thunder Hawk",
+    "nm": 0.0
+   },
+   "rig": "Thunder Hawk",
+   "sst_f": 77.1
+  },
+  {
+   "lat": 28.154,
+   "lon": -89.104,
+   "ll": "28\u00b009.2'N 89\u00b006.2'W",
+   "nm": 150.1,
+   "bearing": 213,
+   "depth_ft": 3822,
+   "near": {
+    "name": "Ursa",
+    "nm": 0.0
+   },
+   "rig": "Ursa",
+   "sst_f": 75.9
+  },
+  {
+   "lat": 28.169,
+   "lon": -89.223,
+   "ll": "28\u00b010.2'N 89\u00b013.4'W",
+   "nm": 152.8,
+   "bearing": 215,
+   "depth_ft": 3028,
+   "near": {
+    "name": "Mars",
+    "nm": 0.0
+   },
+   "rig": "Mars",
+   "sst_f": 75.9
+  }
+ ],
+ "best": {
+  "wahoo": {
+   "lat": 27.93,
+   "lon": -88.52,
+   "ll": "27\u00b055.8'N 88\u00b031.2'W",
+   "nm": 148.6,
+   "bearing": 200,
+   "depth_ft": 7405,
+   "near": {
+    "name": "Thunder Hawk",
+    "nm": 21.2
+   },
+   "cold_f": 77.3,
+   "warm_f": 79.2,
+   "break_f_per_nm": 0.39,
+   "why": "Strongest temperature break with warm side 79.2\u00b0F (cold side 77.3\u00b0F); wahoo key on sharp edges."
+  },
+  "mahi": {
+   "lat": 28.05,
+   "lon": -87.575,
+   "ll": "28\u00b003.0'N 87\u00b034.5'W",
+   "nm": 132.6,
+   "bearing": 180,
+   "depth_ft": 8888,
+   "near": {
+    "name": "Appomattox",
+    "nm": 36.7
+   },
+   "clear_mgm3": 0.12,
+   "green_mgm3": 0.19,
+   "why": "Color edge (0.12\u20130.19 mg/m\u00b3) lines up with a 77.7\u201379.2\u00b0F break 7 nm away; mahi follow color/weed edges."
+  },
+  "marlin": {
+   "lat": 28.375,
+   "lon": -89.375,
+   "ll": "28\u00b022.5'N 89\u00b022.5'W",
+   "nm": 147.8,
+   "bearing": 221,
+   "depth_ft": 2297,
+   "near": {
+    "name": "Mars",
+    "nm": 14.7
+   },
+   "low_cm": -0.6,
+   "high_cm": 16.6,
+   "why": "Edge of the high (warm-core) water: height -0.6 to 16.6 cm; blue water and bait collect on these eddy edges."
+  },
+  "tuna": {
+   "lat": 28.573,
+   "lon": -87.934,
+   "ll": "28\u00b034.4'N 87\u00b056.1'W",
+   "nm": 103.1,
+   "bearing": 191,
+   "depth_ft": 7464,
+   "near": {
+    "name": "Appomattox",
+    "nm": 0.0
+   },
+   "rig": "Appomattox",
+   "sst_f": 77.3,
+   "why": "Warmest deepwater rig water (77.3\u00b0F at Appomattox); tuna hold on the deep rigs."
+  }
+ }
+}
