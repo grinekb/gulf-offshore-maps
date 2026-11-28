@@ -1,0 +1,95 @@
+{
+ "date": "2026-11-28",
+ "generated_ct": "2026-11-28 07:18 CT",
+ "layers": {
+  "sst": {
+   "label": "SST",
+   "image_time": "Thu Nov 26 12:55 PM CT",
+   "source": "NOAA CoastWatch ERDDAP noaacwLEOACSPOSSTL3SnrtPMDay 2026-11-26",
+   "files": {
+    "gulf": "sst_gulf.png",
+    "perdido": "sst_perdido.png"
+   },
+   "data_date": "2026-11-26",
+   "fallback": false
+  },
+  "sst_alt": {
+   "label": "SST alt pass",
+   "image_time": "Thu Nov 26 8:38 AM CT",
+   "source": "NOAA CoastWatch ERDDAP noaacwLEOACSPOSSTL3SnrtAMDay 2026-11-26",
+   "files": {
+    "gulf": "sst_alt_gulf.png",
+    "perdido": "sst_alt_perdido.png"
+   },
+   "data_date": "2026-11-26",
+   "fallback": false
+  },
+  "sst_blend": {
+   "label": "SST blend",
+   "image_time": "2026-11-27 (daily analysis)",
+   "source": "jplMURSST41 (JPL MUR 0.01\u00b0, gap-free) via ERDDAP",
+   "files": {
+    "gulf": "sst_blend_gulf.png",
+    "perdido": "sst_blend_perdido.png"
+   },
+   "data_date": "2026-11-27",
+   "fallback": false
+  },
+  "chl": {
+   "label": "Chlorophyll",
+   "image_time": "composite 2026-11-26 to 2026-11-26",
+   "source": "NOAA CoastWatch ERDDAP (OLCI, MODIS, VIIRS chlorophyll)",
+   "files": {
+    "gulf": "chl_gulf.png",
+    "perdido": "chl_perdido.png"
+   },
+   "data_date": "2026-11-26",
+   "fallback": false
+  },
+  "ssh": {
+   "label": "Altimetry",
+   "image_time": "2026-11-26",
+   "source": "NOAA CoastWatch ERDDAP noaacwBLENDEDsshDaily + noaacwBLENDEDNRTcurrentsDaily",
+   "files": {
+    "gulf": "ssh_gulf.png",
+    "perdido": "ssh_perdido.png"
+   },
+   "data_date": "2026-11-26",
+   "fallback": false
+  },
+  "currents": {
+   "label": "Currents",
+   "image_time": "Fri Nov 27 6:00 PM CT",
+   "source": "NOAA NCEP RTOFS rtofs_20261128_n000_prog.nc",
+   "files": {
+    "gulf": "currents_gulf.png",
+    "perdido": "currents_perdido.png"
+   },
+   "data_date": "2026-11-28",
+   "fallback": false
+  },
+  "salinity": {
+   "label": "Salinity",
+   "image_time": "Fri Nov 27 6:00 PM CT",
+   "source": "NOAA NCEP RTOFS rtofs_20261128_n000_prog.nc",
+   "files": {
+    "gulf": "salinity_gulf.png",
+    "perdido": "salinity_perdido.png"
+   },
+   "data_date": "2026-11-28",
+   "fallback": false
+  },
+  "salinity_sat": {
+   "label": "Salinity satellite",
+   "image_time": "2026-11-25",
+   "source": "noaacwSMAPsssDaily (SMAP 0.25\u00b0) via ERDDAP",
+   "files": {
+    "gulf": "salinity_sat_gulf.png",
+    "perdido": "salinity_sat_perdido.png"
+   },
+   "data_date": "2026-11-25",
+   "fallback": false
+  }
+ },
+ "errors": {}
+}

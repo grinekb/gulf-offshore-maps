@@ -1,11 +1,55 @@
 {
- "updated": "2026-11-27 07:23 CT",
+ "updated": "2026-11-28 07:19 CT",
  "dates": [
+  "2026-11-28",
   "2026-11-27",
   "2026-11-26",
   "2026-11-25"
  ],
  "days": [
+  {
+   "date": "2026-11-28",
+   "dow": "Sat Nov 28, 2026",
+   "maps": [
+    "chl_gulf",
+    "chl_perdido",
+    "currents_gulf",
+    "currents_perdido",
+    "salinity_gulf",
+    "salinity_perdido",
+    "salinity_sat_gulf",
+    "salinity_sat_perdido",
+    "ssh_gulf",
+    "ssh_perdido",
+    "sst_alt_gulf",
+    "sst_alt_perdido",
+    "sst_blend_gulf",
+    "sst_blend_perdido",
+    "sst_gulf",
+    "sst_perdido"
+   ],
+   "picks_img": true,
+   "values": [
+    "chl",
+    "currents",
+    "salinity",
+    "salinity_sat",
+    "ssh",
+    "sst",
+    "sst_alt",
+    "sst_blend"
+   ],
+   "bytes": 2303621,
+   "picks": {
+    "marlin": "28°22.5'N 89°37.5'W · 156 nm @ 224° · near Mars",
+    "wahoo": "30°00.6'N 86°42.6'W · 46 nm @ 109° · near Oriskany",
+    "mahi": "28°52.5'N 88°57.8'W · 111 nm @ 222° · near Na Kika",
+    "tuna": "28°34.4'N 87°56.1'W · 103 nm @ 191° · near Appomattox"
+   },
+   "fallback": {},
+   "moon": "Waning Gibbous 77%",
+   "rating": 2
+  },
   {
    "date": "2026-11-27",
    "dow": "Fri Nov 27, 2026",
